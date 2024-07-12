@@ -14,3 +14,20 @@ export type CamelCaseToSnakeCase<
             >
         >}`
     : Target
+
+export type RangedNumber<
+    Min extends number,
+    Max = number
+> = number
+    & {
+        min: Min,
+        max: Max
+    }
+
+declare const __brand: unique symbol
+
+type Brand<BrandType> = {
+    [__brand]: BrandType
+}
+
+export type Branded<Target, BrandType> = Target & Brand<BrandType>
