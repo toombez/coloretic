@@ -1,0 +1,19 @@
+{
+  "name": "coloretic",
+  "version": "0.0.0",
+  "main": "dist/",
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "dev": "pnpm run build --watch --on-success=\"node dist/index.js\"",
+    "dev:ts": "tsx ./src/index.ts"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "tsup": "^8.0.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.10.5",
+    "typescript": "^5.4.5"
+  }
+}
