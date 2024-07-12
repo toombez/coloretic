@@ -1,7 +1,7 @@
-import COLOR_FORMAT from './ColorFormat'
+import COLOR_MODEL from './ColorModel'
 
-export type * from './ColorFormat'
+export type * from './ColorModel'
 
 export {
-    COLOR_FORMAT
+    COLOR_MODEL
 }
