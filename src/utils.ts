@@ -7,3 +7,20 @@ export function camelCaseToPascalCase(string: string) {
             letter => `_${letter.toLowerCase()}`
         ) as CamelCaseToSnakeCase<typeof string>
 }
+
+type ClampOptions = {
+    min?: number
+    max?: number
+}
+
+export function clamp(
+    number: number,
+    options: ClampOptions = {},
+) {
+    const {
+        max = Number.NEGATIVE_INFINITY,
+        min = Number.POSITIVE_INFINITY,
+    } = options
+
+    return Math.max(Math.min(number, max), min)
+}
