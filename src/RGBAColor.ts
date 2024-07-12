@@ -15,10 +15,10 @@ export default class RGBAColor extends BaseColor<typeof COLOR_MODEL.RGBA> {
     public static readonly MAX_ALPHA_VALUE: number = 1
     public static readonly DEFAULT_ALPHA_VALUE: number = this.MAX_ALPHA_VALUE
 
-    public readonly red: RGBAComponentNumber
-    public readonly green: RGBAComponentNumber
-    public readonly blue: RGBAComponentNumber
-    public readonly alpha: RGBAAlphaNumber
+    public readonly _red: RGBAComponentNumber
+    public readonly _green: RGBAComponentNumber
+    public readonly _blue: RGBAComponentNumber
+    public readonly _alpha: RGBAAlphaNumber
 
     public constructor(
         red: number,
@@ -28,10 +28,59 @@ export default class RGBAColor extends BaseColor<typeof COLOR_MODEL.RGBA> {
     ) {
         super()
 
-        this.red = this.parseNumberToComponent(red)
-        this.green = this.parseNumberToComponent(green)
-        this.blue = this.parseNumberToComponent(blue)
-        this.alpha = this.parseNumberToAlpha(alpha)
+        this._red = this.parseNumberToComponent(red)
+        this._green = this.parseNumberToComponent(green)
+        this._blue = this.parseNumberToComponent(blue)
+        this._alpha = this.parseNumberToAlpha(alpha)
+    }
+
+    public getRed() {
+        return this._red
+    }
+    public getGreen() {
+        return this._green
+    }
+    public getBlue() {
+        return this._blue
+    }
+    public getAlpha() {
+        return this._alpha
+    }
+
+    public setRed(value: number): RGBAColor {
+        return new RGBAColor(
+            value,
+            this.getGreen(),
+            this.getBlue(),
+            this.getAlpha(),
+        )
+    }
+
+    public setGreen(value: number): RGBAColor {
+        return new RGBAColor(
+            this.getRed(),
+            value,
+            this.getBlue(),
+            this.getAlpha(),
+        )
+    }
+
+    public setBlue(value: number): RGBAColor {
+        return new RGBAColor(
+            this.getRed(),
+            this.getGreen(),
+            value,
+            this.getAlpha(),
+        )
+    }
+
+    public setAlpha(value: number): RGBAColor {
+        return new RGBAColor(
+            this.getRed(),
+            this.getGreen(),
+            this.getBlue(),
+            value,
+        )
     }
 
     public get model(): "rgba" {
