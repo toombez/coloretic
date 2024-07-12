@@ -6,6 +6,8 @@ import { clamp } from "./utils"
 type RGBAComponentNumber = Branded<number, 'RGBComponent'>
 type RGBAAlphaNumber = Branded<number, 'RGBAAlpha'>
 
+type RGBAComponents = [number, number, number, number]
+
 export default class RGBAColor extends BaseColor<typeof COLOR_MODEL.RGBA> {
     public static readonly MAX_COMPONENT_VALUE: number = 255
     public static readonly MIN_COMPONENT_VALUE: number = 0
@@ -32,9 +34,18 @@ export default class RGBAColor extends BaseColor<typeof COLOR_MODEL.RGBA> {
         this.alpha = this.parseNumberToAlpha(alpha)
     }
 
-    get model(): "rgba" {
+    public get model(): "rgba" {
         return COLOR_MODEL.RGBA
     }
+
+    public get isTransparent(): boolean {
+        return this.alpha === RGBAColor.MIN_ALPHA_VALUE
+    }
+
+    public get components(): RGBAComponents {
+        return [this.red, this.green, this.blue, this.alpha]
+    }
+
 
     protected parseNumberToComponent(number: number): RGBAComponentNumber {
         return clamp(number, {
@@ -48,5 +59,13 @@ export default class RGBAColor extends BaseColor<typeof COLOR_MODEL.RGBA> {
             min: RGBAColor.MIN_ALPHA_VALUE,
             max: RGBAColor.MAX_ALPHA_VALUE,
         }) as RGBAAlphaNumber
+    }
+
+    protected normalizeColorComponent(number: number) {
+        return number / RGBAColor.MAX_COMPONENT_VALUE
+    }
+
+    protected normalizeAlpha(number: number) {
+        return number / RGBAColor.MAX_ALPHA_VALUE
     }
 }
