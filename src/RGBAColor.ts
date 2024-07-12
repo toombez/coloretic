@@ -88,13 +88,31 @@ export default class RGBAColor extends BaseColor<typeof COLOR_MODEL.RGBA> {
     }
 
     public get isTransparent(): boolean {
-        return this.alpha === RGBAColor.MIN_ALPHA_VALUE
+        return this.getAlpha() === RGBAColor.MIN_ALPHA_VALUE
     }
 
     public get components(): RGBAComponents {
-        return [this.red, this.green, this.blue, this.alpha]
+        return [
+            this.getRed(),
+            this.getGreen(),
+            this.getBlue(),
+            this.getAlpha()
+        ]
     }
 
+    public get normalized(): RGBAComponents {
+        const normalizedColorComponents = this
+            .components
+            .slice(0, 3)
+            .map(this.normalizeColorComponent) as [number, number, number]
+
+        const normalizedAlpha = this.normalizeAlpha(this.getAlpha())
+
+        return [
+            ...normalizedColorComponents,
+            normalizedAlpha
+        ]
+    }
 
     protected parseNumberToComponent(number: number): RGBAComponentNumber {
         return clamp(number, {
