@@ -1,5 +1,4 @@
-import { CamelCaseToSnakeCase } from "./utilityTypes"
-import { camelCaseToPascalCase } from "./utils"
+import { CamelCaseToSnakeCase, camelCaseToPascalCase } from "../utils"
 
 const RAW_COLOR_MODEL = [
     'rgba',

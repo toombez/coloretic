@@ -1,4 +1,4 @@
-import RGBAColor from "./RGBAColor";
+import RGBAColor from "./RGBAColor"
 
 export default class GrayscaleRGBAColor extends RGBAColor {
     public constructor(

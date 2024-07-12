@@ -1,4 +1,4 @@
-import { CamelCaseToSnakeCase } from "./utilityTypes"
+import { CamelCaseToSnakeCase } from "./types"
 
 export function camelCaseToPascalCase(string: string) {
     return string
@@ -24,3 +24,5 @@ export function clamp(
 
     return Math.max(Math.min(number, max), min)
 }
+
+export type * from './types'

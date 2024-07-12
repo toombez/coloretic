@@ -1,7 +1,6 @@
 import BaseColor from "./BaseColor"
 import COLOR_MODEL from "./ColorModel"
-import { Branded } from "./utilityTypes"
-import { clamp } from "./utils"
+import { Branded, clamp } from "../utils"
 
 type RGBAComponentNumber = Branded<number, 'RGBComponent'>
 type RGBAAlphaNumber = Branded<number, 'RGBAAlpha'>
