@@ -1,7 +1,7 @@
 import { CamelCaseToSnakeCase, camelCaseToPascalCase } from "../utils"
 
 const RAW_COLOR_MODEL = [
-    'rgba',
+    'rgb',
 ] as const
 
 type ColorModelConstant = {
