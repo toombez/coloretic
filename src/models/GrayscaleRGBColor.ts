@@ -10,7 +10,7 @@ export default class GrayscaleRGBColor extends RGBAColor {
 
     public setAlpha(value: number): GrayscaleRGBColor {
         return new GrayscaleRGBColor(
-            this.getAlpha(),
+            this.getRed(),
             value,
         )
     }
