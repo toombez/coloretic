@@ -75,7 +75,7 @@ export default class RGBColor extends BaseColor<typeof COLOR_MODEL.RGB> {
         )
     }
 
-    public get model(): "rgb" {
+    public getModel(): "rgb" {
         return COLOR_MODEL.RGB
     }
 

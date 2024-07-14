@@ -34,5 +34,5 @@ export default abstract class BaseColor<Model extends ColorModel> {
     }
 
     public abstract setAlpha(value: number): BaseColor<Model>
-    public abstract get model(): Model
+    public abstract getModel(): Model
 }
