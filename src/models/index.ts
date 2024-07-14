@@ -1,6 +1,6 @@
 import BaseColor from "./BaseColor"
-import RGBAColor from "./RGBAColor"
-import GrayscaleRGBAColor from "./GrayscaleRGBAColor"
+import RGBColor from "./RGBColor"
+import GrayscaleRGBColor from "./GrayscaleRGBColor"
 import COLOR_MODEL, { ColorModel } from "./ColorModel"
 
 export type {
@@ -10,6 +10,6 @@ export type {
 export {
     COLOR_MODEL,
     BaseColor,
-    RGBAColor,
-    GrayscaleRGBAColor,
+    RGBColor,
+    GrayscaleRGBColor,
 }
