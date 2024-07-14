@@ -30,9 +30,11 @@ export default class RGBColor extends BaseColor<typeof COLOR_MODEL.RGB> {
     public getRed() {
         return this._red
     }
+
     public getGreen() {
         return this._green
     }
+
     public getBlue() {
         return this._blue
     }
@@ -77,26 +79,27 @@ export default class RGBColor extends BaseColor<typeof COLOR_MODEL.RGB> {
         return COLOR_MODEL.RGB
     }
 
-    public get components(): RGBComponents {
+    public getColorComponents(): [number, number, number] {
+        return [this.getRed(), this.getGreen(), this.getBlue()]
+    }
+
+    public getComponents(): RGBComponents {
         return [
-            this.getRed(),
-            this.getGreen(),
-            this.getBlue(),
+            ...this.getColorComponents(),
             this.getAlpha()
         ]
     }
 
-    public get normalized(): RGBComponents {
-        const normalizedColorComponents = this
-            .components
-            .slice(0, 3)
-            .map(this.normalizeColorComponent) as [number, number, number]
+    public getColorNormalized(): [number, number, number] {
+        return this
+            .getColorComponents()
+            .map(this.normalizeColorComponent) as [ number, number, number]
+    }
 
-        const normalizedAlpha = this.normalizeAlpha(this.getAlpha())
-
+    public getNormalized(): RGBComponents {
         return [
-            ...normalizedColorComponents,
-            normalizedAlpha
+            ...this.getColorNormalized(),
+            this.getNormalizedAlpha(),
         ]
     }
 
@@ -109,9 +112,5 @@ export default class RGBColor extends BaseColor<typeof COLOR_MODEL.RGB> {
 
     protected normalizeColorComponent(number: number) {
         return number / RGBColor.MAX_COMPONENT_VALUE
-    }
-
-    protected normalizeAlpha(number: number) {
-        return number / RGBColor.MAX_ALPHA_VALUE
     }
 }
