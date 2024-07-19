@@ -33,9 +33,9 @@ export default class HSLColor extends BaseColorSpace<typeof COLOR_SPACE.HSL> {
 
     public getNormalized(): [number, number, number] {
         return [
-            this._hue.getValue(),
-            this._saturation.getValue(),
-            this._lightness.getValue(),
+            this._hue.toNormalUnit().getValue(),
+            this._saturation.toNormalUnit().getValue(),
+            this._lightness.toNormalUnit().getValue(),
         ]
     }
 

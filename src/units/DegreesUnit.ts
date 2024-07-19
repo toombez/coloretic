@@ -1,5 +1,7 @@
 import { Branded } from "../utils"
 import ColorSpaceUnit from "./ColorSpaceUnit"
+import NormalUnit from "./NormalUnit"
+import PercentageUnit from "./PercentageUnit"
 
 export default class DegreesUnit extends ColorSpaceUnit<'degrees'> {
     public static DEGREES_PER_PI = 180
@@ -30,6 +32,14 @@ export default class DegreesUnit extends ColorSpaceUnit<'degrees'> {
 
     public getMax(): 360 {
         return DegreesUnit.DEGREES_PER_PI * 2 as 360
+    }
+
+    public toNormalUnit(): NormalUnit {
+        return new NormalUnit(this.getValue() / this.getMax())
+    }
+
+    public toPercentageUnit(): PercentageUnit {
+        return this.toNormalUnit().toPercentageUnit()
     }
 
     protected static radiansToDegrees(radians: number): number {
