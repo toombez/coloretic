@@ -25,4 +25,13 @@ export function clamp(
     return Math.max(Math.min(number, max), min)
 }
 
+export function modulo(number: number, options: ClampOptions = {}): number {
+    const {
+        min = Number.MIN_SAFE_INTEGER,
+        max = Number.MAX_SAFE_INTEGER,
+    } = options
+
+    return ((number-min) % (max - min + 1) + (max - min + 1)) % (max - min + 1) + min
+}
+
 export type * from './types'
