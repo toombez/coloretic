@@ -6,7 +6,7 @@ export default class NormalUnit extends ColorSpaceUnit<'normal'> {
         return 'normal'
     }
 
-    public setValue(value: number): ColorSpaceUnit<"normal"> {
+    public setValue(value: number): NormalUnit {
         return new NormalUnit(value)
     }
 

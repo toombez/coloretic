@@ -6,7 +6,7 @@ export default class PercentageUnit extends ColorSpaceUnit<'percentage'> {
         return 'percentage'
     }
 
-    public setValue(value: number): ColorSpaceUnit<"percentage"> {
+    public setValue(value: number): PercentageUnit {
         return new PercentageUnit(value)
     }
 
