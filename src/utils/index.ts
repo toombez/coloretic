@@ -1,4 +1,4 @@
-import { CamelCaseToSnakeCase } from "./types"
+import { CamelCaseToSnakeCase, CreateConstantsFromRawArray } from "./types"
 
 export function camelCaseToPascalCase(string: string) {
     return string
@@ -32,6 +32,15 @@ export function modulo(number: number, options: ClampOptions = {}): number {
     } = options
 
     return ((number-min) % (max - min + 1) + (max - min + 1)) % (max - min + 1) + min
+}
+
+export function createConstantsObject<
+    RawArray extends ReadonlyArray<string>
+>(values: RawArray): CreateConstantsFromRawArray<RawArray> {
+    return values.reduce((constant, value) => ({
+        ...constant,
+        [camelCaseToPascalCase(value).toUpperCase()]: value
+    }), {}) as CreateConstantsFromRawArray<RawArray>
 }
 
 export type * from './types'

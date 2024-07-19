@@ -31,3 +31,9 @@ type Brand<BrandType> = {
 }
 
 export type Branded<Target, BrandType> = Target & Brand<BrandType>
+
+export type CreateConstantsFromRawArray<
+    RawArray extends ReadonlyArray<string>
+> = {
+    [Key in RawArray[number] as Uppercase<CamelCaseToSnakeCase<Key>>]: Key
+}
