@@ -4,6 +4,7 @@ import { createConstantsObject } from "../utils"
 
 const RAW_COLOR_SPACES = [
     'rgb',
+    'hsl',
 ] as const
 
 export const COLOR_SPACE = createConstantsObject(RAW_COLOR_SPACES)
