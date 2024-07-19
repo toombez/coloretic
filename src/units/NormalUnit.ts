@@ -1,4 +1,4 @@
-import { Branded, clamp } from "../utils"
+import { Branded } from "../utils"
 import ColorSpaceUnit from "./ColorSpaceUnit"
 
 export default class NormalUnit extends ColorSpaceUnit<'normal'> {
@@ -11,10 +11,7 @@ export default class NormalUnit extends ColorSpaceUnit<'normal'> {
     }
 
     public parse(value: number): Branded<number, "normal"> {
-        return clamp(value, {
-            min: this.getMin(),
-            max: this.getMax(),
-        }) as Branded<number, 'normal'>
+        return this.clampParse(value)
     }
 
     public getMin(): 0 {

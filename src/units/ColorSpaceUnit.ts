@@ -1,4 +1,4 @@
-import { Branded } from "../utils"
+import { Branded, clamp, modulo } from "../utils"
 
 export default abstract class ColorSpaceUnit<
     Name extends string
@@ -26,6 +26,28 @@ export default abstract class ColorSpaceUnit<
 
     public abstract getMin(): number
     public abstract getMax(): number
+
+    protected clampParse(value: number): Branded<number, Name> {
+        return clamp(value, {
+            min: this.getMin(),
+            max: this.getMax(),
+        }) as Branded<number, Name>
+    }
+
+    protected moduloParse(value: number): Branded<number, Name> {
+        const min = this.getMin()
+        const max = this.getMax()
+
+        return modulo(value, {
+            min: Number.isFinite(min)
+                ? min
+                : Number.MIN_SAFE_INTEGER,
+            max: Number.isFinite(max)
+                ? (max - 1)
+                : Number.MAX_SAFE_INTEGER,
+        }) as Branded<number, Name>
+    }
+
 
     private _value: Branded<number, Name>
 }

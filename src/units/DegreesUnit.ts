@@ -1,4 +1,4 @@
-import { Branded, modulo } from "../utils"
+import { Branded } from "../utils"
 import ColorSpaceUnit from "./ColorSpaceUnit"
 
 export default class DegreesUnit extends ColorSpaceUnit<'degrees'> {
@@ -21,10 +21,7 @@ export default class DegreesUnit extends ColorSpaceUnit<'degrees'> {
     }
 
     public parse(value: number): Branded<number, "degrees"> {
-        return modulo(value, {
-            min: this.getMin(),
-            max: this.getMax() - 1,
-        }) as Branded<number, 'degrees'>
+        return this.moduloParse(value)
     }
 
     public getMin(): 0 {

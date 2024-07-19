@@ -1,4 +1,4 @@
-import { Branded, clamp } from "../utils"
+import { Branded } from "../utils"
 import ColorSpaceUnit from "./ColorSpaceUnit"
 
 export default class PercentageUnit extends ColorSpaceUnit<'percentage'> {
@@ -11,10 +11,7 @@ export default class PercentageUnit extends ColorSpaceUnit<'percentage'> {
     }
 
     public parse(value: number): Branded<number, "percentage"> {
-        return clamp(value, {
-            min: this.getMin(),
-            max: this.getMax(),
-        }) as Branded<number, 'percentage'>
+        return this.clampParse(value)
     }
 
     public getMin(): 0 {
