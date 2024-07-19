@@ -1,5 +1,7 @@
 import { Branded } from "../utils"
 import ColorSpaceUnit from "./ColorSpaceUnit"
+import NormalUnit from "./NormalUnit"
+import PercentageUnit from "./PercentageUnit"
 
 export default class EightBitUnit extends ColorSpaceUnit<'eightBit'> {
     public getName(): "eightBit" {
@@ -20,5 +22,13 @@ export default class EightBitUnit extends ColorSpaceUnit<'eightBit'> {
 
     public getMax(): 255 {
         return 255
+    }
+
+    public toNormalUnit(): NormalUnit {
+        return new NormalUnit(this.getValue() / this.getMax())
+    }
+
+    public toPercentageUnit(): PercentageUnit {
+        return this.toNormalUnit().toPercentageUnit()
     }
 }

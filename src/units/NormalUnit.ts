@@ -1,5 +1,6 @@
 import { Branded } from "../utils"
 import ColorSpaceUnit from "./ColorSpaceUnit"
+import PercentageUnit from "./PercentageUnit"
 
 export default class NormalUnit extends ColorSpaceUnit<'normal'> {
     public getName(): "normal" {
@@ -20,5 +21,9 @@ export default class NormalUnit extends ColorSpaceUnit<'normal'> {
 
     public getMax(): 1 {
         return 1
+    }
+
+    public toPercentageUnit(): PercentageUnit {
+        return new PercentageUnit(this.getValue() * 100)
     }
 }
