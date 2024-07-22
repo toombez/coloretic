@@ -1,36 +1,20 @@
-import { NormalUnit } from "../units"
+import { clamp } from "../utils"
 
-import { createConstantsObject } from "../utils"
+export const MIN_ALPHA = 0
+export const MAX_ALPHA = 1
+export const DEFAULT_ALPHA = MAX_ALPHA
 
-const RAW_COLOR_SPACES = [
-    'rgb',
-    'hsl',
-] as const
+export default abstract class BaseColorSpace {
+    public readonly alpha: number
 
-export const COLOR_SPACE = createConstantsObject(RAW_COLOR_SPACES)
-
-export type ColorSpace = typeof COLOR_SPACE[keyof typeof COLOR_SPACE]
-
-export default abstract class BaseColorSpace<Name extends string> {
-    public static DEFAULT_ALPHA = 1
-
-    public constructor(alpha: number = BaseColorSpace.DEFAULT_ALPHA) {
-        this._alpha = new NormalUnit(alpha)
+    public constructor(alpha: number = DEFAULT_ALPHA) {
+        this.alpha = BaseColorSpace.parseAlpha(alpha)
     }
 
-    public getAlpha(): number {
-        return this._alpha.getValue()
+    private static parseAlpha(alpha: number): number {
+        return Math.round(clamp(alpha, {
+            minimum: MIN_ALPHA,
+            maximum: MAX_ALPHA,
+        }) * 100) / 100
     }
-
-    public isTransparent(): boolean {
-        return this._alpha.getValue() !== this._alpha.getMin()
-    }
-
-    public abstract getComponents(): number[]
-    public abstract getNormalized(): number[]
-    public abstract setAlpha(alpha: number): BaseColorSpace<Name>
-
-    public abstract getName(): Name
-
-    private _alpha: NormalUnit
 }
