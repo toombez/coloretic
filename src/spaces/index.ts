@@ -1,3 +1,5 @@
-export * from './BaseColorSpace'
+export * from './base/index'
 
-export * from './RGBColor'
+export * from './rgb'
+
+export * from './hsl'

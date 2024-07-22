@@ -1,46 +1,39 @@
-import { CamelCaseToSnakeCase, CreateConstantsFromRawArray } from "./types"
-
-export function camelCaseToPascalCase(string: string) {
-    return string
-        .replace(
-            /[A-Z]/g,
-            letter => `_${letter.toLowerCase()}`
-        ) as CamelCaseToSnakeCase<typeof string>
+type LimitOptions = {
+    minimum?: number
+    maximum?: number
 }
 
-type ClampOptions = {
-    min?: number
-    max?: number
+export const inRange = (value: number, {
+    minimum = Number.POSITIVE_INFINITY,
+    maximum = Number.NEGATIVE_INFINITY,
+}: LimitOptions = {}): boolean => {
+    return value >= minimum && value <= maximum
 }
 
-export function clamp(
-    number: number,
-    options: ClampOptions = {},
-) {
-    const {
-        max = Number.NEGATIVE_INFINITY,
-        min = Number.POSITIVE_INFINITY,
-    } = options
+export const clamp = (value: number, {
+    minimum = Number.NEGATIVE_INFINITY,
+    maximum = Number.POSITIVE_INFINITY,
+}: LimitOptions = {}): number =>  {
+    if (inRange(value, { minimum, maximum })) {
+        return value
+    }
 
-    return Math.max(Math.min(number, max), min)
+    return Math.min(Math.max(value, minimum), maximum)
 }
 
-export function modulo(number: number, options: ClampOptions = {}): number {
-    const {
-        min = Number.MIN_SAFE_INTEGER,
-        max = Number.MAX_SAFE_INTEGER,
-    } = options
+export const modulo = (value: number, {
+    minimum = Number.MIN_SAFE_INTEGER,
+    maximum = Number.MAX_SAFE_INTEGER,
+}: LimitOptions = {}): number => {
+    // Make minimum and maximum same number
+    // Example: With circle 0 degrees and 360 degrees are same
+    const _maximum = maximum - 1
 
-    return ((number-min) % (max - min + 1) + (max - min + 1)) % (max - min + 1) + min
+    if (inRange(value, { minimum, maximum: _maximum })) {
+        return value
+    }
+
+    return (
+        (value - minimum) % (_maximum - minimum + 1) + (_maximum - minimum + 1)
+    ) % (_maximum - minimum + 1) + minimum
 }
-
-export function createConstantsObject<
-    RawArray extends ReadonlyArray<string>
->(values: RawArray): CreateConstantsFromRawArray<RawArray> {
-    return values.reduce((constant, value) => ({
-        ...constant,
-        [camelCaseToPascalCase(value).toUpperCase()]: value
-    }), {}) as CreateConstantsFromRawArray<RawArray>
-}
-
-export type * from './types'
