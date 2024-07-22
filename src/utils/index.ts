@@ -1,18 +1,3 @@
-import { CamelCaseToSnakeCase, CreateConstantsFromRawArray } from "./types"
-
-export function camelCaseToPascalCase(string: string) {
-    return string
-        .replace(
-            /[A-Z]/g,
-            letter => `_${letter.toLowerCase()}`
-        ) as CamelCaseToSnakeCase<typeof string>
-}
-
-type ClampOptions = {
-    min?: number
-    max?: number
-}
-
 type LimitOptions = {
     minimum?: number
     maximum?: number
@@ -52,5 +37,3 @@ export const modulo = (value: number, {
         (value - minimum) % (_maximum - minimum + 1) + (_maximum - minimum + 1)
     ) % (_maximum - minimum + 1) + minimum
 }
-
-export type * from './types'
