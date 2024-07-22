@@ -4,7 +4,7 @@ export const MIN_HUE = 0
 export const MAX_HUE = 360
 
 export const MIN_PERCENTAGE = 0
-export const MAX_PERCENTAGE = 0
+export const MAX_PERCENTAGE = 100
 
 export default class HSLData {
     public readonly hue: number
