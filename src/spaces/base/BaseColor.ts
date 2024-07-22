@@ -1,14 +1,17 @@
-import { clamp } from "../utils"
+import { clamp } from "../../utils"
 
 export const MIN_ALPHA = 0
 export const MAX_ALPHA = 1
 export const DEFAULT_ALPHA = MAX_ALPHA
 
-export default abstract class BaseColorSpace {
+export default class BaseColor<T> {
     public readonly alpha: number
 
-    public constructor(alpha: number = DEFAULT_ALPHA) {
-        this.alpha = BaseColorSpace.parseAlpha(alpha)
+    public constructor(
+        alpha: number = DEFAULT_ALPHA,
+        public readonly colorData: T,
+    ) {
+        this.alpha = BaseColor.parseAlpha(alpha)
     }
 
     private static parseAlpha(alpha: number): number {

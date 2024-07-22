@@ -1,5 +1,4 @@
-import { clamp, modulo } from "../utils"
-import BaseColorSpace from "./BaseColorSpace"
+import { clamp, modulo } from "../../utils"
 
 export const MIN_HUE = 0
 export const MAX_HUE = 360
@@ -7,7 +6,7 @@ export const MAX_HUE = 360
 export const MIN_PERCENTAGE = 0
 export const MAX_PERCENTAGE = 0
 
-export default class HSLColor extends BaseColorSpace {
+export default class HSLData {
     public readonly hue: number
     public readonly saturation: number
     public readonly lightness: number
@@ -16,13 +15,10 @@ export default class HSLColor extends BaseColorSpace {
         hue: number,
         saturation: number,
         lightness: number,
-        alpha?: number,
     ) {
-        super(alpha)
-
-        this.hue = HSLColor.parseHue(hue)
-        this.saturation = HSLColor.parsePercentage(saturation)
-        this.lightness = HSLColor.parsePercentage(lightness)
+        this.hue = HSLData.parseHue(hue)
+        this.saturation = HSLData.parsePercentage(saturation)
+        this.lightness = HSLData.parsePercentage(lightness)
     }
 
     private static parseHue(hue: number): number {
