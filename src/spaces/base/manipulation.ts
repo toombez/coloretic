@@ -5,7 +5,7 @@ export const transparentize = <T>(
     amount: number,
 ): BaseColor<T> => new BaseColor(color.alpha - amount, color.colorData)
 
-export const opacityfy = <T>(
+export const opacify = <T>(
     color: BaseColor<T>,
     amount: number,
 ): BaseColor<T> => transparentize(color, - amount)
