@@ -1,11 +1,12 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig((options) => ({
-    dts: true,
-    entry: {
-        index: './src/index.ts',
-    },
+    entry: ['src/index.ts'],
+    onSuccess: options.watch ? "node dist/index.js" : undefined,
     format: ['cjs', 'esm'],
     clean: !options.watch,
     minify: !options.watch,
+    dts: !options.watch,
+    treeshake: !options.watch,
+    shims: !options.watch,
 }))
