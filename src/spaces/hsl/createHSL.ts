@@ -30,33 +30,42 @@ export const copyHSLWithModify = (
 )
 
 export const createHSLFromRGB = (rgb: RGBColor): HSLColor => {
-    const [r, g, b] = getRGBNormalComponents(rgb)
+    // TODO: Add optimization for `Math.abs` and `mod` operations
+    const [red, green, blue] = getRGBNormalComponents(rgb)
+    const alpha = rgb.alpha
 
-    const maxVal = Math.max(r, g, b)
-    const minVal = Math.min(r, g, b)
-    let h: number, s: number;
-    const l = (maxVal + minVal) / 2;
+    const minComponent = Math.min(red, green, blue)
+    const maxComponent = Math.max(red, green, blue)
 
-    if (maxVal === minVal) {
-        h = s = 0; // achromatic
-    } else {
-        const delta = maxVal - minVal;
-        s = l > 0.5 ? delta / (2 - maxVal - minVal) : delta / (maxVal + minVal);
+    const delta = maxComponent - minComponent
 
-        switch (maxVal) {
-            case r:
-                h = (g - b) / delta + (g < b ? 6 : 0);
-                break;
-            case g:
-                h = (b - r) / delta + 2;
-                break;
-            default:
-                h = (r - g) / delta + 4;
-        }
-        h /= 6;
+    const lightness = (minComponent + maxComponent) / 2
+
+    let hue: number = 0, saturation: number = 0
+
+    if (delta === 0) {
+        return new HSLColor(
+            hue * 360,
+            saturation * 100,
+            lightness * 100,
+            alpha,
+        )
     }
 
-    return new HSLColor(h * 360, s * 100, l * 100, rgb.alpha)
+    saturation = delta / (1 - Math.abs(2 * lightness - 1))
+
+    switch (maxComponent) {
+        case red:
+            hue = ((green - blue) / delta) % 6
+            break;
+        case green:
+            hue = (blue - red) / delta + 2
+            break;
+        default:
+            hue = (red - green) / delta + 4
+    }
+
+    return new HSLColor(hue * 60, saturation * 100, lightness * 100, alpha)
 }
 
 export const castHSLFromBaseColor = (
