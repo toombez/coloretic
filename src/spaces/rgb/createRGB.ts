@@ -1,8 +1,9 @@
 import { RawRGBArray, RawRGBObject, RawRGBArrayWithAlpha } from "../../types"
 import BaseColor from "../base/BaseColor"
+import { getHSLNormalComponentsWithoutAlpha } from "../hsl"
 import HSLColor from "../hsl/HSLColor"
 import RGBColor from "./RGBColor"
-import RGBData from "./RGBData"
+import RGBData, { MAX_RGB_COMPONENT } from "./RGBData"
 
 export const createRGBFromArray = (raw: RawRGBArray): RGBColor =>
     new RGBColor(...raw as RawRGBArrayWithAlpha)
@@ -33,33 +34,38 @@ export const copyRGBWithModify = (
     raw.alpha || rgb.alpha,
 )
 
+const hueToRgb = (p: number, q: number, t: number): number => {
+    if (t < 0) t += 1
+    if (t > 1) t -= 1
+    if (t < (1 / 6)) return p + (q - p) * (6 * t)
+    if (t < (1 / 2)) return q
+    if (t < (2 / 3)) return p + (q - p) * (((2 / 3) - t) * 6)
+    return p
+}
+
 export const createRGBFromHSL = (hsl: HSLColor): RGBColor => {
-    const H = hsl.colorData.hue / 360;
-    const S = hsl.colorData.saturation / 100;
-    const L = hsl.colorData.lightness / 100;
+    const [
+        hue,
+        saturation,
+        lightness,
+    ] = getHSLNormalComponentsWithoutAlpha(hsl)
 
-    const hueToRgb = (p: number, q: number, t: number): number => {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1/6) return p + (q - p) * 6 * t;
-        if (t < 1/2) return q;
-        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-        return p;
-    };
-
-    let r: number, g: number, b: number;
-
-    if (S === 0) {
-        r = g = b = L; // achromatic
-    } else {
-        const q = L < 0.5 ? L * (1 + S) : L + S - L * S;
-        const p = 2 * L - q;
-        r = hueToRgb(p, q, H + 1/3);
-        g = hueToRgb(p, q, H);
-        b = hueToRgb(p, q, H - 1/3);
+    if (saturation === 0) {
+        const component = lightness * MAX_RGB_COMPONENT
+        return new RGBColor(component, component, component, hsl.alpha)
     }
 
-    return new RGBColor(r * 255, g * 255, b * 255, hsl.alpha )
+    const q = lightness < 0.5
+        ? lightness * (1 + saturation)
+        : lightness + saturation - lightness * saturation
+
+    const p = 2 * lightness - q
+
+    const red = hueToRgb(p, q, hue + (1 / 3)) * MAX_RGB_COMPONENT
+    const green = hueToRgb(p, q, hue) * MAX_RGB_COMPONENT
+    const blue = hueToRgb(p, q, hue - (1 / 3)) * MAX_RGB_COMPONENT
+
+    return new RGBColor(red, green, blue, hsl.alpha)
 }
 
 export const castRGBFromBaseColor = (
