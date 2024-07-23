@@ -40,8 +40,6 @@ export const createHSLFromRGB = (rgb: RGBColor): HSLColor => {
 
     const lightness = (minComponent + maxComponent) / 2
 
-    console.log(lightness)
-
     let hue: number = 0, saturation: number = 0
 
     if (delta === 0) {
