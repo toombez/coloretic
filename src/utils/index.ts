@@ -4,8 +4,8 @@ type LimitOptions = {
 }
 
 export const inRange = (value: number, {
-    minimum = Number.POSITIVE_INFINITY,
-    maximum = Number.NEGATIVE_INFINITY,
+    minimum = Number.NEGATIVE_INFINITY,
+    maximum = Number.POSITIVE_INFINITY,
 }: LimitOptions = {}): boolean => {
     return value >= minimum && value <= maximum
 }

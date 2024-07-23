@@ -12,12 +12,16 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "dev:tsx": "tsx ./src/index.ts"
+    "dev:tsx": "tsx ./src/index.ts",
+    "test": "vitest --config ./vitest.config.ts",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^2.0.4",
     "tsup": "^8.2.2",
     "tsx": "^4.16.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.4"
   },
   "homepage": "https://github.com/toombez/coloretic",
   "repository": {
