@@ -32,6 +32,7 @@ export const copyHSLWithModify = (
 export const createHSLFromRGB = (rgb: RGBColor): HSLColor => {
     // TODO: Add optimization for `Math.abs` and `mod` operations
     const [red, green, blue] = getRGBNormalComponents(rgb)
+    const alpha = rgb.alpha
 
     const minComponent = Math.min(red, green, blue)
     const maxComponent = Math.max(red, green, blue)
@@ -43,7 +44,12 @@ export const createHSLFromRGB = (rgb: RGBColor): HSLColor => {
     let hue: number = 0, saturation: number = 0
 
     if (delta === 0) {
-        return new HSLColor(hue * 360, saturation * 100, lightness * 100)
+        return new HSLColor(
+            hue * 360,
+            saturation * 100,
+            lightness * 100,
+            alpha,
+        )
     }
 
     saturation = delta / (1 - Math.abs(2 * lightness - 1))
@@ -59,7 +65,7 @@ export const createHSLFromRGB = (rgb: RGBColor): HSLColor => {
             hue = (red - green) / delta + 4
     }
 
-    return new HSLColor(hue * 60, saturation * 100, lightness * 100, rgb.alpha)
+    return new HSLColor(hue * 60, saturation * 100, lightness * 100, alpha)
 }
 
 export const castHSLFromBaseColor = (
