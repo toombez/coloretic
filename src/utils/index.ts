@@ -25,6 +25,14 @@ export const modulo = (value: number, {
     minimum = Number.MIN_SAFE_INTEGER,
     maximum = Number.MAX_SAFE_INTEGER,
 }: LimitOptions = {}): number => {
+    if (
+        !Number.isFinite(maximum)
+        || !Number.isFinite(minimum)
+        || !Number.isFinite(value)
+    ) {
+        throw new RangeError("Infinity numbers for modulo not allowed")
+    }
+
     // Make minimum and maximum same number
     // Example: With circle 0 degrees and 360 degrees are same
     const _maximum = maximum - 1
