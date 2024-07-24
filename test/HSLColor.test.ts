@@ -7,11 +7,13 @@ import {
     createHSLFromArray,
     createHSLFromObject,
     createHSLFromRGB,
+    darken,
     getHLSComponents,
     getHSLComponentsWithAlpha,
     getHSLNormalComponents,
     getHSLNormalComponentsWithAlpha,
     HSLColor,
+    lighten,
     RGBColor,
 } from "../src"
 
@@ -172,6 +174,25 @@ describe('hsl color', () => {
 
             expect(getHSLNormalComponentsWithAlpha(hsl))
                 .toEqual([1 / 3, 0.5, 0.8, 0.5])
+        })
+    })
+
+    describe('manipulations with hsl', () => {
+        test('lighten affects only for lightness', () => {
+            const hsl = new HSLColor(360, 0, 50)
+            const lightenHSL = lighten(hsl, 50)
+
+            expect(lightenHSL.colorData.lightness).toBe(100)
+            expect(lightenHSL.colorData.hue).toBe(hsl.colorData.hue)
+            expect(lightenHSL.colorData.saturation).toBe(hsl.colorData.saturation)
+            expect(lightenHSL.alpha).toBe(hsl.alpha)
+        })
+
+        test('darken reduce lightness of hsl', () => {
+            const hsl = new HSLColor(360, 0, 50)
+            const darkenHSL = darken(hsl, 50)
+
+            expect(darkenHSL.colorData.lightness).toBe(0)
         })
     })
 })
