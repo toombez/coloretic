@@ -26,12 +26,12 @@ export const copyRGB = (rgb: RGBColor): RGBColor =>
 
 export const copyRGBWithModify = (
     rgb: RGBColor,
-    raw: Partial<RawRGBObject>,
+    raw: Partial<RawRGBObject> = {},
 ): RGBColor => new RGBColor(
-    raw.red || rgb.colorData.red,
-    raw.green || rgb.colorData.green,
-    raw.blue || rgb.colorData.blue,
-    raw.alpha || rgb.alpha,
+    raw.red ?? rgb.colorData.red,
+    raw.green ?? rgb.colorData.green,
+    raw.blue ?? rgb.colorData.blue,
+    raw.alpha ?? rgb.alpha,
 )
 
 const hueToRgb = (p: number, q: number, t: number): number => {
