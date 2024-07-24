@@ -1,5 +1,19 @@
 import { describe, expect, test } from "vitest"
-import { BaseColor, castHSLFromBaseColor, copyHSL, copyHSLWithModify, createHSLFromArray, createHSLFromObject, createHSLFromRGB, HSLColor, RGBColor } from "../src"
+import {
+    BaseColor,
+    castHSLFromBaseColor,
+    copyHSL,
+    copyHSLWithModify,
+    createHSLFromArray,
+    createHSLFromObject,
+    createHSLFromRGB,
+    getHLSComponents,
+    getHSLComponentsWithAlpha,
+    getHSLNormalComponents,
+    getHSLNormalComponentsWithAlpha,
+    HSLColor,
+    RGBColor,
+} from "../src"
 
 describe('hsl color', () => {
     describe('creating hsl color', () => {
@@ -131,6 +145,33 @@ describe('hsl color', () => {
             expect(hsl2.colorData.hue).toEqual(1)
             expect(hsl2.colorData.saturation).toEqual(100)
             expect(hsl2.colorData.lightness).toEqual(0)
+        })
+    })
+
+    describe('getters for hsl', () => {
+        test('get components for hsl', () => {
+            const hsl = new HSLColor(120, 50, 80)
+
+            expect(getHLSComponents(hsl)).toEqual([120, 50, 80])
+        })
+
+        test('get components with alpha for hsl', () => {
+            const hsl = new HSLColor(120, 50, 80, 0.5)
+
+            expect(getHSLComponentsWithAlpha(hsl)).toEqual([120, 50, 80, 0.5])
+        })
+
+        test('get normal components for hsl', () => {
+            const hsl = new HSLColor(120, 50, 80)
+
+            expect(getHSLNormalComponents(hsl)).toEqual([1 / 3, 0.5, 0.8])
+        })
+
+        test('get normal components for hsl', () => {
+            const hsl = new HSLColor(120, 50, 80, 0.5)
+
+            expect(getHSLNormalComponentsWithAlpha(hsl))
+                .toEqual([1 / 3, 0.5, 0.8, 0.5])
         })
     })
 })
