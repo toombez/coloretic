@@ -15,7 +15,7 @@ export const getHSLComponentsWithAlpha = (
     hsl.alpha,
 ]
 
-export const getHSLNormalComponentsWithoutAlpha = (
+export const getHSLNormalComponents = (
     hsl: HSLColor
 ): RawHSLArrayWithoutAlpha => [
     hsl.colorData.hue / MAX_HUE,
@@ -26,6 +26,6 @@ export const getHSLNormalComponentsWithoutAlpha = (
 export const getHSLNormalComponentsWithAlpha = (
     hsl: HSLColor
 ): RawHSLArrayWithAlpha => [
-    ...getHSLNormalComponentsWithoutAlpha(hsl),
+    ...getHSLNormalComponents(hsl),
     hsl.alpha,
 ]

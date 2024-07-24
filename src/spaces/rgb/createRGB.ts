@@ -1,6 +1,6 @@
 import { RawRGBArray, RawRGBObject, RawRGBArrayWithAlpha } from "../../types"
 import BaseColor from "../base/BaseColor"
-import { getHSLNormalComponentsWithoutAlpha } from "../hsl"
+import { getHSLNormalComponents } from "../hsl"
 import HSLColor from "../hsl/HSLColor"
 import RGBColor from "./RGBColor"
 import RGBData, { MAX_RGB_COMPONENT } from "./RGBData"
@@ -26,12 +26,12 @@ export const copyRGB = (rgb: RGBColor): RGBColor =>
 
 export const copyRGBWithModify = (
     rgb: RGBColor,
-    raw: Partial<RawRGBObject>,
+    raw: Partial<RawRGBObject> = {},
 ): RGBColor => new RGBColor(
-    raw.red || rgb.colorData.red,
-    raw.green || rgb.colorData.green,
-    raw.blue || rgb.colorData.blue,
-    raw.alpha || rgb.alpha,
+    raw.red ?? rgb.colorData.red,
+    raw.green ?? rgb.colorData.green,
+    raw.blue ?? rgb.colorData.blue,
+    raw.alpha ?? rgb.alpha,
 )
 
 const hueToRgb = (p: number, q: number, t: number): number => {
@@ -48,7 +48,7 @@ export const createRGBFromHSL = (hsl: HSLColor): RGBColor => {
         hue,
         saturation,
         lightness,
-    ] = getHSLNormalComponentsWithoutAlpha(hsl)
+    ] = getHSLNormalComponents(hsl)
 
     if (saturation === 0) {
         const component = lightness * MAX_RGB_COMPONENT

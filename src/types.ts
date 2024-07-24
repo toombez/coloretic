@@ -19,5 +19,5 @@ export type RawHSLObject = {
     hue: number
     saturation: number
     lightness: number
-    alpha: number
+    alpha?: number
 }

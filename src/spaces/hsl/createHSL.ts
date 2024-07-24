@@ -21,12 +21,12 @@ export const copyHSL = (hsl: HSLColor): HSLColor =>
 
 export const copyHSLWithModify = (
     hsl: HSLColor,
-    raw: Partial<RawHSLObject>,
+    raw: Partial<RawHSLObject> = {},
 ): HSLColor => new HSLColor(
-    raw.hue || hsl.colorData.hue,
-    raw.saturation || hsl.colorData.saturation,
-    raw.lightness || hsl.colorData.lightness,
-    raw.alpha || hsl.alpha,
+    raw.hue ?? hsl.colorData.hue,
+    raw.saturation ?? hsl.colorData.saturation,
+    raw.lightness ?? hsl.colorData.lightness,
+    raw.alpha ?? hsl.alpha,
 )
 
 export const createHSLFromRGB = (rgb: RGBColor): HSLColor => {
