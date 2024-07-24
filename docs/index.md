@@ -4,15 +4,15 @@ layout: home
 
 hero:
   name: "Coloretic"
-  text: "A library for creating and manipulating various color spaces"
-  tagline: My great project tagline
+  text: "Enchanced colors"
+  tagline: "Library for creating and manipulating various color spaces"
+  # image:
+  #   src: "logo.svg"
+  #   alt: "Coloretic logo"
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Get started
+      link: /getting-started
 
 features:
   - title: Feature A
@@ -22,4 +22,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-
