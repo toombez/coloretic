@@ -88,6 +88,26 @@ describe('rgb color', () => {
             expect(rgb.colorData.blue).toBe(178)
         })
 
+        test('create rgb from hsl with zero saturation', () => {
+            const hsl = new HSLColor(317, 52, 49, 0.7)
+            const rgb = createRGBFromHSL(hsl)
+
+            expect(rgb.alpha).toBe(0.7)
+            expect(rgb.colorData.red).toBe(190)
+            expect(rgb.colorData.green).toBe(60)
+            expect(rgb.colorData.blue).toBe(153)
+        })
+
+        test('create rgb from hsl with lightness less than 50%', () => {
+            const hsl = new HSLColor(317, 0, 61, 0.7)
+            const rgb = createRGBFromHSL(hsl)
+
+            expect(rgb.alpha).toBe(0.7)
+            expect(rgb.colorData.red).toBe(156)
+            expect(rgb.colorData.green).toBe(156)
+            expect(rgb.colorData.blue).toBe(156)
+        })
+
         test('creating hsl color from base color with raw', () => {
             const base = new BaseColor(0.7, {
                 red: 25,
