@@ -13,10 +13,26 @@ type LimitOptions = {
     maximum: number
 }
 
-export const inRange = (value: number, {
+/**
+ * Checks if a given number falls within a specified range including minimum and maximum.
+ *
+ * `options.minimum` fallback is `Number.NEGATIVE_INFINITY`.
+ *
+ * `options.maximum` fallback is `Number.POSITIVE_INFINITY`.
+ *
+ * @param value - Number to be checked against the range.
+ * @param options - Object specifying the range boundaries.
+ * @returns `true` if `value` within range `[minimum, maximum]`, `false` else.
+ */
+export const inRange = (
+    value: number,
+    options: Partial<LimitOptions> = {}
+): boolean => {
+    const {
     minimum = Number.NEGATIVE_INFINITY,
     maximum = Number.POSITIVE_INFINITY,
-}: LimitOptions = {}): boolean => {
+    } = options
+
     return value >= minimum && value <= maximum
 }
 
