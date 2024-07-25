@@ -1,6 +1,16 @@
+/**
+ * Options for setting limits.
+ */
 type LimitOptions = {
-    minimum?: number
-    maximum?: number
+    /**
+     * The minimum value allowed.
+     */
+    minimum: number
+
+    /**
+     * The maximum value allowed.
+     */
+    maximum: number
 }
 
 export const inRange = (value: number, {
