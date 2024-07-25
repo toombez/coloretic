@@ -29,8 +29,8 @@ export const inRange = (
     options: Partial<LimitOptions> = {}
 ): boolean => {
     const {
-    minimum = Number.NEGATIVE_INFINITY,
-    maximum = Number.POSITIVE_INFINITY,
+        minimum = Number.NEGATIVE_INFINITY,
+        maximum = Number.POSITIVE_INFINITY,
     } = options
 
     return value >= minimum && value <= maximum
@@ -52,8 +52,8 @@ export const clamp = (
     options: Partial<LimitOptions> = {}
 ): number => {
     const {
-    minimum = Number.NEGATIVE_INFINITY,
-    maximum = Number.POSITIVE_INFINITY,
+        minimum = Number.NEGATIVE_INFINITY,
+        maximum = Number.POSITIVE_INFINITY,
     } = options
 
     if (inRange(value, { minimum, maximum })) {
@@ -63,10 +63,28 @@ export const clamp = (
     return Math.min(Math.max(value, minimum), maximum)
 }
 
-export const modulo = (value: number, {
-    minimum = Number.MIN_SAFE_INTEGER,
-    maximum = Number.MAX_SAFE_INTEGER,
-}: LimitOptions = {}): number => {
+/**
+ * Computes the modulo of a number within a specified range including minimum.
+ *
+ * If any value is Infinity falls with error.
+ *
+ * `options.minimum` fallback is `Number.MIN_SAFE_INTEGER`.
+ *
+ * `options.maximum` fallback is `Number.MAX_SAFE_INTEGER`.
+ *
+ * @param value - Number to compute the modulo for.
+ * @param options - Object specifying the range boundaries.
+ * @returns The value within the range `[minimum, maximum)`.
+ */
+export const modulo = (
+    value: number,
+    options: Partial<LimitOptions> = {}
+): number => {
+    const {
+        minimum = Number.MIN_SAFE_INTEGER,
+        maximum = Number.MAX_SAFE_INTEGER,
+    } = options
+
     if (
         !Number.isFinite(maximum)
         || !Number.isFinite(minimum)
