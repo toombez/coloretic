@@ -36,10 +36,26 @@ export const inRange = (
     return value >= minimum && value <= maximum
 }
 
-export const clamp = (value: number, {
+/**
+ * Clamps a number within a specified range including minimum and maximum.
+ *
+ * `options.minimum` fallback is `Number.NEGATIVE_INFINITY`.
+ *
+ * `options.maximum` fallback is `Number.POSITIVE_INFINITY`.
+ *
+ * @param value - Number to be clamped.
+ * @param options - Object specifying the range boundaries.
+ * @returns Clamped value, which will be within the range `[minimum, maximum]`.
+ */
+export const clamp = (
+    value: number,
+    options: Partial<LimitOptions> = {}
+): number => {
+    const {
     minimum = Number.NEGATIVE_INFINITY,
     maximum = Number.POSITIVE_INFINITY,
-}: LimitOptions = {}): number =>  {
+    } = options
+
     if (inRange(value, { minimum, maximum })) {
         return value
     }
