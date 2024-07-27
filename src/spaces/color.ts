@@ -10,7 +10,7 @@ export type Color<
 > = Readonly<{
     _tag: Tag
     data: Readonly<Data>
-    alpha: number
+    alpha: number,
 }>
 
 export const createColor = <
@@ -26,5 +26,5 @@ export const createColor = <
         minimum: MIN_ALPHA,
         maximum: MAX_ALPHA,
     }) * 100) / 100,
-    data: Object.freeze(data),
+    data: Object.freeze({ ...data}),
 })
