@@ -11,13 +11,18 @@ const hueToRgb = (p: number, q: number, t: number): number => {
 }
 
 export const HSL2RGB = (hsl: HSLColor): RGBColor => {
-    const hue = hsl.data.hue / 360
-    const saturation = hsl.data.saturation / 100
-    const lightness = hsl.data.lightness / 100
+    const hue = hsl.components.hue / 360
+    const saturation = hsl.components.saturation / 100
+    const lightness = hsl.components.lightness / 100
 
     if (saturation === 0) {
         const component = lightness * 255
-        return createRGBColor(component, component, component, hsl.alpha)
+        return createRGBColor({
+            red: component,
+            green: component,
+            blue: component,
+            alpha: hsl.alpha,
+        })
     }
 
     const q = lightness < 0.5
@@ -30,14 +35,14 @@ export const HSL2RGB = (hsl: HSLColor): RGBColor => {
     const green = hueToRgb(p, q, hue) * 255
     const blue = hueToRgb(p, q, hue - (1 / 3)) * 255
 
-    return createRGBColor(red, green, blue, hsl.alpha)
+    return createRGBColor({ red, green, blue, alpha: hsl.alpha })
 }
 
 export const RGB2HSL = (rgb: RGBColor): HSLColor => {
     // TODO: Add optimization for `Math.abs` and `mod` operations
-    const red = rgb.data.red / 255
-    const green = rgb.data.green / 255
-    const blue = rgb.data.blue / 255
+    const red = rgb.components.red / 255
+    const green = rgb.components.green / 255
+    const blue = rgb.components.blue / 255
     const alpha = rgb.alpha
 
     const minComponent = Math.min(red, green, blue)
@@ -50,12 +55,12 @@ export const RGB2HSL = (rgb: RGBColor): HSLColor => {
     let hue: number = 0, saturation: number = 0
 
     if (delta === 0) {
-        return createHSLColor(
-            hue * 360,
-            saturation * 100,
-            lightness * 100,
+        return createHSLColor({
+            hue: hue * 360,
+            saturation: saturation * 100,
+            lightness: lightness * 100,
             alpha,
-        )
+        })
     }
 
     saturation = delta / (1 - Math.abs(2 * lightness - 1))
@@ -71,5 +76,10 @@ export const RGB2HSL = (rgb: RGBColor): HSLColor => {
             hue = (red - green) / delta + 4
     }
 
-    return createHSLColor(hue * 60, saturation * 100, lightness * 100, alpha)
+    return createHSLColor({
+        hue: hue * 60,
+        saturation: saturation * 100,
+        lightness: lightness * 100,
+        alpha,
+    })
 }
