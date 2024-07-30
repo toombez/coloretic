@@ -36,9 +36,11 @@ export const createHSLColor = createColorFactory<
     saturation: percentageValidator,
 })
 
+// TODO: check fields in color
 export const isHSLColor = (
     color: Color<string, any>,
 ): color is HSLColor => color._tag === HSL_TAG
+
 export const {
     add: rotateHue,
     set: setHue,
