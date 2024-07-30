@@ -1,5 +1,12 @@
 import { assert, describe, expect, test } from "vitest"
-import { createColor, createColorFactory, modifyColor, opacify, transparentize } from "../src"
+import {
+    createColor,
+    createColorComponentOperations,
+    createColorFactory,
+    modifyColor,
+    opacify,
+    transparentize,
+} from "../src"
 
 describe('generic color', () => {
     describe('creating generic color', () => {
@@ -173,6 +180,49 @@ describe('generic color', () => {
             // @ts-ignore
             const modifyedColor = modifyColor({ unknownField1: 1 }, color)
             expect(Object.keys(modifyedColor.components)).not.contain('unknownField1')
+        })
+    })
+
+    describe('creating color components operations', () => {
+        test('creating operation returns set, add and remove functions', () => {
+            const factory = createColorFactory<
+                'test',
+                { foo: number, bar: number }
+            >('test', { bar: n => n, foo: n => n })
+
+            const fooOperations = createColorComponentOperations<
+                'test',
+                { foo: number, bar: number }
+            >('foo', factory)
+
+            expect(Object.keys(fooOperations)).contain('add')
+            expect(Object.keys(fooOperations)).contain('set')
+            expect(Object.keys(fooOperations)).contain('remove')
+
+            expect(fooOperations.add).toBeTypeOf('function')
+            expect(fooOperations.remove).toBeTypeOf('function')
+            expect(fooOperations.set).toBeTypeOf('function')
+        })
+
+        test('created operations while allying validates values', () => {
+            const factory = createColorFactory<
+                'test',
+                { foo: number, bar: number }
+            >('test', { foo: n => Math.max(0, n), bar: n => Math.min(100, n) })
+
+            const fooOperations = createColorComponentOperations<
+                'test',
+                { foo: number, bar: number }
+            >('foo', factory)
+
+            const color = factory({ bar: 50, foo: 50 })
+            const addedFoo = fooOperations.add(-100, color)
+            const removedFoo = fooOperations.remove(100, color)
+            const settedFoo = fooOperations.set(-100, color)
+
+            expect(addedFoo.components.foo).toBeGreaterThanOrEqual(0)
+            expect(removedFoo.components.foo).toBeGreaterThanOrEqual(0)
+            expect(settedFoo.components.foo).toBeGreaterThanOrEqual(0)
         })
     })
 })
