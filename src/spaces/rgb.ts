@@ -1,5 +1,5 @@
 import { clamp } from "../utils"
-import { Color, createColorFactory } from "./color"
+import { Color, createColorComponentOperations, createColorFactory } from "./color"
 
 export const MIN_RGB_COMPONENT = 0
 export const MAX_RGB_COMPONENT = 255
@@ -31,3 +31,31 @@ export const createRGBColor = createColorFactory<
 export const isRGBColor = (
     color: Color<string, any>,
 ): color is RGBColor => color._tag === RGB_TAG
+
+
+export const {
+    add: addRed,
+    remove: removeRed,
+    set: setRed,
+} = createColorComponentOperations<
+    typeof RGB_TAG,
+    RGBComponents
+>('red', createRGBColor)
+
+export const {
+    add: addGreen,
+    remove: removeGreen,
+    set: setGreen,
+} = createColorComponentOperations<
+    typeof RGB_TAG,
+    RGBComponents
+>('green', createRGBColor)
+
+export const {
+    add: addBlue,
+    remove: removeBlue,
+    set: setBlue,
+} = createColorComponentOperations<
+    typeof RGB_TAG,
+    RGBComponents
+>('blue', createRGBColor)
