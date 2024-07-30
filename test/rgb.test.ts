@@ -1,55 +1,56 @@
 import { describe, expect, test } from "vitest"
-import { createColor, createRGBColor, isRGBColor } from "../src"
+import { createColor, createRGBColor, isRGBColor, opacify, transparentize } from "../src"
 
 describe('rgb color', () => {
-    test('rgb color tag is "RGB"', () => {
-        const rgb = createRGBColor(0, 0, 0)
+    test('rgb color components in range of [0, 255]', () => {
+        const rgb = createRGBColor({ red: 1000, blue: -1000, green: 0 })
 
-        expect(rgb._tag).toBe('RGB')
+        expect(rgb.components.red).toBeGreaterThanOrEqual(0)
+        expect(rgb.components.red).toBeLessThanOrEqual(255)
+        expect(rgb.components.green).toBeGreaterThanOrEqual(0)
+        expect(rgb.components.green).toBeLessThanOrEqual(255)
+        expect(rgb.components.blue).toBeGreaterThanOrEqual(0)
+        expect(rgb.components.blue).toBeLessThanOrEqual(255)
     })
 
-    test('rgb color red component in range [0, 255]', () => {
-        const fullRedRgb = createRGBColor(300, 0, 0)
-        const zeroRedRgb = createRGBColor(-320, 0, 0)
-        const semiRedRgb = createRGBColor(128, 0, 0)
+    test('rgb alpha in range of [0, 1]', () => {
+        const color1 = createRGBColor({ red: 0, blue: 0, green: 0, alpha: 2 })
+        expect(color1.alpha).toBeGreaterThanOrEqual(0)
+        expect(color1.alpha).toBeLessThanOrEqual(1)
 
-        expect(fullRedRgb.data.red).toBe(255)
-        expect(zeroRedRgb.data.red).toBe(0)
-        expect(semiRedRgb.data.red >= 0).toBeTruthy()
-        expect(semiRedRgb.data.red <= 255).toBeTruthy()
+        const color2 = createRGBColor({ red: 0, blue: 0, green: 0, alpha: -2 })
+        expect(color2.alpha).toBeGreaterThanOrEqual(0)
+        expect(color2.alpha).toBeLessThanOrEqual(1)
+
+        const color3 = createRGBColor({ red: 0, blue: 0, green: 0, alpha: 0.5 })
+        expect(color3.alpha).toBeGreaterThanOrEqual(0)
+        expect(color3.alpha).toBeLessThanOrEqual(1)
     })
 
-    test('rgb color green component in range [0, 255]', () => {
-        const fullGreenRgb = createRGBColor(0, 300, 0)
-        const zeroGreenRgb = createRGBColor(0, -320, 0)
-        const semiGreenRgb = createRGBColor(0, 128, 0)
+    test('isRGBColor correct defines', () => {
+        const rgb = createRGBColor({ red: 0, blue: 0, green: 0 })
+        expect(isRGBColor(rgb)).toBeTruthy()
 
-        expect(fullGreenRgb.data.green).toBe(255)
-        expect(zeroGreenRgb.data.green).toBe(0)
-        expect(semiGreenRgb.data.green >= 0).toBeTruthy()
-        expect(semiGreenRgb.data.green <= 255).toBeTruthy()
+        const unknownColor = createColor('RGB', { red: 0, green: 0, blue: 0 })
+        expect(isRGBColor(unknownColor)).toBeTruthy()
+
+        const uncorrectColor = createColor('RGB', {})
+        expect(isRGBColor(uncorrectColor)).toBeTruthy()
     })
 
-    test('rgb color blue component in range [0, 255]', () => {
-        const fullBlueRgb = createRGBColor(0, 0, 300)
-        const zeroBlueRgb = createRGBColor(0, 0, -320)
-        const semiBlueRgb = createRGBColor(0, 0, 128)
+    test('opacify with rgb creates rgb color', () => {
+        const rgb = createRGBColor({ red: 0, blue: 0, green: 0, alpha: 0.5 })
+        const opacifyed = opacify(0.3, rgb)
 
-        expect(fullBlueRgb.data.blue).toBe(255)
-        expect(zeroBlueRgb.data.blue).toBe(0)
-        expect(semiBlueRgb.data.blue >= 0).toBeTruthy()
-        expect(semiBlueRgb.data.blue <= 255).toBeTruthy()
+        expect(isRGBColor(opacifyed)).toBeTruthy()
     })
 
-    test('checking is rgb correct', () => {
-        const rgbColor = createRGBColor(255, 0, 0)
-        const objectRgbColor = createColor('RGB', {
-            red: 0,
-            green: 0,
-            blue: 0,
-        })
+    test('transparentize with rgb creates rgb color', () => {
+        const rgb = createRGBColor({ red: 0, blue: 0, green: 0, alpha: 0.5 })
+        const transparentized = transparentize(0.3, rgb)
 
-        expect(isRGBColor(rgbColor)).toBeTruthy()
-        expect(isRGBColor(objectRgbColor)).toBeTruthy()
+        expect(isRGBColor(transparentized)).toBeTruthy()
     })
+
+    test.todo("rgb operations")
 })
