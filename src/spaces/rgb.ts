@@ -28,6 +28,7 @@ export const createRGBColor = createColorFactory<
     blue: validateRGBComponent,
 })
 
+// TODO: check fields in color
 export const isRGBColor = (
     color: Color<string, any>,
 ): color is RGBColor => color._tag === RGB_TAG

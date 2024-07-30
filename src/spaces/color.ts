@@ -69,7 +69,8 @@ export const modifyColor = <
 >(
     data: Partial<C & { alpha?: number }>,
     color: Color<T, C>,
-    colorFactory: ColorFactory<T, C> // TODO: add fallback
+    colorFactory: ColorFactory<T, C> = ({ alpha, ...components }) =>
+        createColor(color._tag, components as C, alpha)
 ): Color<T, C> => {
     const newData = Object
         .entries(color.components)
@@ -84,11 +85,10 @@ export const modifyColor = <
 export const opacify = <
     T extends string,
     C extends Record<string, number>
->(amount: number, color: Color<T, C>): Color<T, C> => createColor(
-    color._tag,
-    color.components,
-    color.alpha + amount,
-)
+>(amount: number, color: Color<T, C>): Color<T, C> => modifyColor({
+    alpha: color.alpha + amount,
+    ...color.components,
+}, color)
 
 export const transparentize = <
     T extends string,
