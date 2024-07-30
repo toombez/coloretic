@@ -1,5 +1,5 @@
 import { assert, describe, expect, test } from "vitest"
-import { createColor, createColorFactory, opacify, transparentize } from "../src"
+import { createColor, createColorFactory, modifyColor, opacify, transparentize } from "../src"
 
 describe('generic color', () => {
     describe('creating generic color', () => {
@@ -127,6 +127,52 @@ describe('generic color', () => {
             const transparentizedColor3 = transparentize(-1, color3)
             expect(transparentizedColor3.alpha).toBeGreaterThanOrEqual(0)
             expect(transparentizedColor3.alpha).toBeLessThanOrEqual(1)
+        })
+    })
+
+    describe('modifying color', () => {
+        test('passing alpha to modifyColor will change color alpha', () => {
+            const color = createColor('test', {})
+            const modifyedColor = modifyColor({ alpha: 0.5 }, color)
+
+            expect(modifyedColor.alpha).toBe(0.5)
+        })
+
+        test('passed alpha to modifyColor creates new color with alpha in range [0, 1]', () => {
+            const color1 = createColor('test', {})
+            const modifyedColor1 = modifyColor({ alpha: 2 }, color1)
+            expect(modifyedColor1.alpha).toBeGreaterThanOrEqual(0)
+            expect(modifyedColor1.alpha).toBeLessThanOrEqual(1)
+
+            const color2 = createColor('test', {})
+            const modifyedColor2 = modifyColor({ alpha: -1 }, color2)
+            expect(modifyedColor2.alpha).toBeGreaterThanOrEqual(0)
+            expect(modifyedColor2.alpha).toBeLessThanOrEqual(1)
+
+            const color3 = createColor('test', {})
+            const modifyedColor3 = modifyColor({ alpha: 0.5 }, color3)
+            expect(modifyedColor3.alpha).toBeGreaterThanOrEqual(0)
+            expect(modifyedColor3.alpha).toBeLessThanOrEqual(1)
+        })
+
+        test('if alpha not passed to modifyColor alpha will be picked from original color', () => {
+            const color = createColor('test', {})
+            const modifyedColor = modifyColor({}, color)
+
+            expect(color.alpha).toBe(modifyedColor.alpha)
+        })
+
+        test('passing component values to modifyColor change original color components', () => {
+            const color = createColor('test', { foo: 2, bar: 0 })
+            const modifyedColor = modifyColor({ bar: 3 }, color)
+            expect(modifyedColor.components.bar).toBe(3)
+        })
+
+        test('passing unknown for color values to modifyColor will be not affect to original', () => {
+            const color = createColor('test', { foo: 2, bar: 0 })
+            // @ts-ignore
+            const modifyedColor = modifyColor({ unknownField1: 1 }, color)
+            expect(Object.keys(modifyedColor.components)).not.contain('unknownField1')
         })
     })
 })
