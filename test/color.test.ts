@@ -1,5 +1,5 @@
 import { assert, describe, expect, test } from "vitest"
-import { createColor, createColorFactory } from "../src"
+import { createColor, createColorFactory, opacify, transparentize } from "../src"
 
 describe('generic color', () => {
     describe('creating generic color', () => {
@@ -77,6 +77,56 @@ describe('generic color', () => {
 
             const color2 = createTestColor({ foo: 4, bar: 4, alpha: -0.2 })
             expect(color2.alpha).toBe(0)
+        })
+    })
+
+    describe('modifying color alpha', () => {
+        test('opacify creates new color', () => {
+            const color = createColor('test', {}, 0.5)
+            const opacifyedColor = opacify(0.3, color)
+
+            expect(opacifyedColor.alpha).not.toBe(color)
+        })
+
+        test('opacifyed color alpha in range [0, 1]', () => {
+            const color1 = createColor('test', {}, 0.5)
+            const opacifyedColor1 = opacify(0.3, color1)
+            expect(opacifyedColor1.alpha).toBeGreaterThanOrEqual(0)
+            expect(opacifyedColor1.alpha).toBeLessThanOrEqual(1)
+
+            const color2 = createColor('test', {}, 0.5)
+            const opacifyedColor2 = opacify(1, color2)
+            expect(opacifyedColor2.alpha).toBeGreaterThanOrEqual(0)
+            expect(opacifyedColor2.alpha).toBeLessThanOrEqual(1)
+
+            const color3 = createColor('test', {}, 0.5)
+            const opacifyedColor3 = opacify(-1, color3)
+            expect(opacifyedColor3.alpha).toBeGreaterThanOrEqual(0)
+            expect(opacifyedColor3.alpha).toBeLessThanOrEqual(1)
+        })
+
+        test('transparentize creates new color', () => {
+            const color = createColor('test', {}, 0.5)
+            const transparentizedColor = transparentize(0.3, color)
+
+            expect(transparentizedColor.alpha).not.toBe(color)
+        })
+
+        test('transparentized color alpha in range [0, 1]', () => {
+            const color1 = createColor('test', {}, 0.5)
+            const transparentizedColor1 = transparentize(0.3, color1)
+            expect(transparentizedColor1.alpha).toBeGreaterThanOrEqual(0)
+            expect(transparentizedColor1.alpha).toBeLessThanOrEqual(1)
+
+            const color2 = createColor('test', {}, 0.5)
+            const transparentizedColor2 = transparentize(1, color2)
+            expect(transparentizedColor2.alpha).toBeGreaterThanOrEqual(0)
+            expect(transparentizedColor2.alpha).toBeLessThanOrEqual(1)
+
+            const color3 = createColor('test', {}, 0.5)
+            const transparentizedColor3 = transparentize(-1, color3)
+            expect(transparentizedColor3.alpha).toBeGreaterThanOrEqual(0)
+            expect(transparentizedColor3.alpha).toBeLessThanOrEqual(1)
         })
     })
 })
