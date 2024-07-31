@@ -39,7 +39,8 @@ export default defineConfig({
                 text: 'Reference',
                 base: '/reference',
                 items: [
-                    { text: "API Reference", link: '/' }
+                    { text: "API Reference", link: '/' },
+                    { text: 'Glossary', link: '/glossary' }
                 ]
             }
         ],
