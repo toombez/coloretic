@@ -18,7 +18,32 @@ export default defineConfig({
             provider: 'local'
         },
 
-        sidebar: [],
+        sidebar: [
+            {
+                text: 'Guide',
+                base: '/guide',
+                items: [
+                    { text: 'Getting started', link: '/' },
+                    { text: 'Implementing color space', link: '/implementing-color-space' },
+                ]
+            },
+            {
+                text: 'Color spaces',
+                base: '/color-spaces',
+                items: [
+                    { text: 'RGB color space', link: '/rgb' },
+                    { text: 'HSL color space', link: '/hsl' },
+                ]
+            },
+            {
+                text: 'Reference',
+                base: '/reference',
+                items: [
+                    { text: "API Reference", link: '/' },
+                    { text: 'Glossary', link: '/glossary' }
+                ]
+            }
+        ],
 
         socialLinks: [
             { icon: 'github', link: 'https://github.com/toombez/coloretic' },
