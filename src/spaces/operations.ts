@@ -1,6 +1,13 @@
 import { clamp } from "../utils"
 import { createRGBColor, RGBColor } from "./rgb"
 
+/**
+ * Alpha blending RGB colors using {@link https://www.w3.org/TR/compositing-1/#generalformula | css formula}.
+ *
+ * @param underColor - bottom color.
+ * @param overlayColor - top color.
+ * @returns color as result of alpha blending.
+ */
 export const alphaBlendingRGB = (
     underColor: RGBColor,
     overlayColor: RGBColor,
@@ -32,6 +39,14 @@ export const alphaBlendingRGB = (
     })
 }
 
+/**
+ * Mix RGB colors based on weight.
+ *
+ * @param color1 - first color to mix.
+ * @param color2 - second color to mix.
+ * @param weight - ratio for mixing. 0 - full first color, 1 - full second.
+ * @returns new color as result of mixing.
+ */
 export const mixRGB = (
     color1: RGBColor,
     color2: RGBColor,

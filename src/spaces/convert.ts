@@ -10,6 +10,12 @@ const hueToRgb = (p: number, q: number, t: number): number => {
     return p
 }
 
+/**
+ * Convert HSL color to RGB.
+ *
+ * @param hsl - HSL color to convert.
+ * @returns RGB color.
+ */
 export const HSL2RGB = (hsl: HSLColor): RGBColor => {
     const hue = hsl.components.hue / 360
     const saturation = hsl.components.saturation / 100
@@ -38,6 +44,12 @@ export const HSL2RGB = (hsl: HSLColor): RGBColor => {
     return createRGBColor({ red, green, blue, alpha: hsl.alpha })
 }
 
+/**
+ * Convert RGB color to HSL.
+ *
+ * @param rgb - RGB color to convert.
+ * @returns HSL color.
+ */
 export const RGB2HSL = (rgb: RGBColor): HSLColor => {
     // TODO: Add optimization for `Math.abs` and `mod` operations
     const red = rgb.components.red / 255
