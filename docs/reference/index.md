@@ -391,6 +391,26 @@ desaturate(150, color) // new color with lightness component equals 0
 desaturate(-150, color) // new color with lightness component equals 100
 ```
 
+## Converts
+
+### `RGB2HSL`
+
+Convert RGB color to HSL color.
+
+```ts
+const rgb = createRGBColor({ red: 255, green: 0, blue: 0 })
+RGB2HSL(rgb) // HSL color with hue = 0, saturation = 100, lightness = 50
+```
+
+### `HSL2RGB`
+
+Convert HSL color to RGB color.
+
+```ts
+const hsl = createHSLColor({ hue: 0, saturation: 100, lightness: 50 })
+HSL2RGB(hsl) // RGB color with red = 255, green = 0, blue = 0
+```
+
 ## Utils API
 
 ### `inRange`
