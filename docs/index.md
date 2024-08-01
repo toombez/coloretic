@@ -13,12 +13,18 @@ hero:
     - theme: brand
       text: Get started
       link: /guide
+    - theme: alt
+      text: API Reference
+      link: /reference
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🔒
+    title: Immutability
+    details: All data that creates by functions is immutable
+  - icon: 🦾
+    title: Type Strong
+    details: Written in TypeScript, with full TS docs
+  - icon: ⚡
+    title: Zero dependency
+    details: Written with native language
 ---

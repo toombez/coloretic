@@ -184,7 +184,7 @@ describe('generic color', () => {
     })
 
     describe('creating color components operations', () => {
-        test('creating operation returns set, add and remove functions', () => {
+        test('creating operation returns set, increase and decrease functions', () => {
             const factory = createColorFactory<
                 'test',
                 { foo: number, bar: number }
@@ -195,12 +195,12 @@ describe('generic color', () => {
                 { foo: number, bar: number }
             >('foo', factory)
 
-            expect(Object.keys(fooOperations)).contain('add')
+            expect(Object.keys(fooOperations)).contain('increase')
             expect(Object.keys(fooOperations)).contain('set')
-            expect(Object.keys(fooOperations)).contain('remove')
+            expect(Object.keys(fooOperations)).contain('decrease')
 
-            expect(fooOperations.add).toBeTypeOf('function')
-            expect(fooOperations.remove).toBeTypeOf('function')
+            expect(fooOperations.increase).toBeTypeOf('function')
+            expect(fooOperations.decrease).toBeTypeOf('function')
             expect(fooOperations.set).toBeTypeOf('function')
         })
 
@@ -216,12 +216,12 @@ describe('generic color', () => {
             >('foo', factory)
 
             const color = factory({ bar: 50, foo: 50 })
-            const addedFoo = fooOperations.add(-100, color)
-            const removedFoo = fooOperations.remove(100, color)
+            const increasedFoo = fooOperations.increase(-100, color)
+            const decreasedFoo = fooOperations.decrease(100, color)
             const settedFoo = fooOperations.set(-100, color)
 
-            expect(addedFoo.components.foo).toBeGreaterThanOrEqual(0)
-            expect(removedFoo.components.foo).toBeGreaterThanOrEqual(0)
+            expect(increasedFoo.components.foo).toBeGreaterThanOrEqual(0)
+            expect(decreasedFoo.components.foo).toBeGreaterThanOrEqual(0)
             expect(settedFoo.components.foo).toBeGreaterThanOrEqual(0)
         })
     })

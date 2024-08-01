@@ -1,8 +1,12 @@
 import { clamp, modulo } from "../utils"
-import { Color, createColorComponentOperations, createColorFactory } from "./color"
+import {
+    Color,
+    createColorComponentOperations,
+    createColorFactory,
+} from "./color"
 
 /**
- * The minimum value of the hue component.
+ * The minimal value of the hue component.
  */
 export const MIN_HUE = 0
 
@@ -12,7 +16,7 @@ export const MIN_HUE = 0
 export const MAX_HUE = 360
 
 /**
- * The minimum value of the saturation and lightness components.
+ * The minimal value of the saturation and lightness components.
  */
 export const MIN_PERCENTAGE = 0
 
@@ -64,7 +68,7 @@ const percentageValidator = (value: number) => Math.round(clamp(value, {
 /**
  * Create HSL color.
  *
- * @param data - object that contain hue, saturation, lightness components and alpha channel.
+ * @param data - Object that contain hue, saturation, lightness components and alpha channel.
  * @returns HSL color.
  */
 export const createHSLColor = createColorFactory<
@@ -79,7 +83,7 @@ export const createHSLColor = createColorFactory<
 /**
  * Check color is HSL color.
  *
- * @param color - target color to check.
+ * @param color - Target color to check.
  * @returns `true` if color is HSL, else - `false`
  */
 // TODO: check fields in color
@@ -95,20 +99,20 @@ const  hueOperations = createColorComponentOperations<
 /**
  * Set hue component for HSL color.
  *
- * @param amount - amount to set.
- * @param color - target color.
- * @returns new HSL color with setted hue component.
+ * @param amount - Amount to set.
+ * @param color - Target color.
+ * @returns New HSL color with setted hue component.
  */
 export const setHue = hueOperations.set
 
 /**
  * Add hue component for RGB color.
  *
- * @param amount - amount to add.
- * @param color - target color.
- * @returns new HSL color with added hue component.
+ * @param amount - Amount to add.
+ * @param color - Target color.
+ * @returns New HSL color with added hue component.
  */
-export const rotateHue = hueOperations.add
+export const rotateHue = hueOperations.increase
 
 const lightnessOperations = createColorComponentOperations<
     typeof HSL_TAG,
@@ -118,29 +122,29 @@ const lightnessOperations = createColorComponentOperations<
 /**
  * Set lightness component for HSL color.
  *
- * @param amount - amount to set.
- * @param color - target color.
- * @returns new HSL color with setted lightness component.
+ * @param amount - Amount to set.
+ * @param color - Target color.
+ * @returns New HSL color with setted lightness component.
  */
 export const setLightness = lightnessOperations.set
 
 /**
- * Add lightness component for HSL color.
+ * Increase lightness component for HSL color.
  *
- * @param amount - amount to add.
- * @param color - target color.
- * @returns new HSL color with added lightness component.
+ * @param amount - Amount to increase.
+ * @param color - Target color.
+ * @returns New HSL color with increased lightness component.
  */
-export const lighten = lightnessOperations.add
+export const lighten = lightnessOperations.increase
 
 /**
- * Subtract lightness component for HSL color.
+ * Decrease lightness component for HSL color.
  *
- * @param amount - amount to subtract.
- * @param color - target color.
- * @returns new HSL color with reduced lightness component.
+ * @param amount - Amount to decrease.
+ * @param color - Target color.
+ * @returns New HSL color with decreased lightness component.
  */
-export const darken = lightnessOperations.remove
+export const darken = lightnessOperations.decrease
 
 const saturationOperations = createColorComponentOperations<
     typeof HSL_TAG,
@@ -150,26 +154,26 @@ const saturationOperations = createColorComponentOperations<
 /**
  * Set saturation component for HSL color.
  *
- * @param amount - amount to set.
- * @param color - target color.
- * @returns new HSL color with setted saturation component.
+ * @param amount - Amount to set.
+ * @param color - Target color.
+ * @returns New HSL color with setted saturation component.
  */
 export const setSaturation = saturationOperations.set
 
 /**
- * Add saturation component for HSL color.
+ * Increase saturation component for HSL color.
  *
- * @param amount - amount to add.
- * @param color - target color.
- * @returns new HSL color with added saturation component.
+ * @param amount - Amount to increase.
+ * @param color - Target color.
+ * @returns New HSL color with increased saturation component.
  */
-export const saturate = saturationOperations.add
+export const saturate = saturationOperations.increase
 
 /**
- * Subtract saturation component for HSL color.
+ * Decrease saturation component for HSL color.
  *
- * @param amount - amount to subtract.
- * @param color - target color.
- * @returns new HSL color with reduced saturation component.
+ * @param amount - Amount to decrease.
+ * @param color - Target color.
+ * @returns New HSL color with decreased saturation component.
  */
-export const desaturate = saturationOperations.remove
+export const desaturate = saturationOperations.decrease
