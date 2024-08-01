@@ -28,17 +28,17 @@ pnpm i coloretic
 const red = createRGBColor({ red: 255, blue: 0, green: 0 })
 ```
 
-```ts [Change color]
+```ts [Changing color]
 const violet = setBlue(255, red)
 const yellow = setGreen(255, red)
 const semiTransparentRed = transparentize(0.5, red)
 ```
 
-```ts [Converting colors]
+```ts [Converting color]
 const hslRed = HSL2RGB(red)
 ```
 
-```ts [Operate with colors]
+```ts [Operating with color]
 const gray = mixRGB(white, black, 0.5)
 const semiTransparentViolet = alphaBlending(
   semiTransparentRed,

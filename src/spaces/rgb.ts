@@ -1,8 +1,12 @@
 import { clamp } from "../utils"
-import { Color, createColorComponentOperations, createColorFactory } from "./color"
+import {
+    Color,
+    createColorComponentOperations,
+    createColorFactory,
+} from "./color"
 
 /**
- * The minimum value of the RGB components.
+ * The minimal value of the RGB components.
  */
 export const MIN_RGB_COMPONENT = 0
 
@@ -49,7 +53,7 @@ const validateRGBComponent = (value: number) => Math.round(clamp(value, {
 /**
  * Create RGB color.
  *
- * @param data - object that contain red, green, blue components and alpha channel.
+ * @param data - Object that contain red, green, blue components and alpha channel.
  * @returns RGB color.
  */
 export const createRGBColor = createColorFactory<
@@ -64,7 +68,7 @@ export const createRGBColor = createColorFactory<
 /**
  * Check color is RGB color.
  *
- * @param color - target color to check.
+ * @param color - Target color to check.
  * @returns `true` if color is RGB, else - `false`
  */
 // TODO: check fields in color
@@ -80,27 +84,27 @@ const redOperations = createColorComponentOperations<
 /**
  * Set red component for RGB color.
  *
- * @param amount - amount to set.
- * @param color - target color.
- * @returns new RGB color with setted red component.
+ * @param amount - Amount to set.
+ * @param color - Target color.
+ * @returns New RGB color with setted red component.
  */
 export const setRed = redOperations.set
 
 /**
  * Increase red component for RGB color.
  *
- * @param amount - amount to increase.
- * @param color - target color.
- * @returns new RGB color with increased red component.
+ * @param amount - Amount to increase.
+ * @param color - Target color.
+ * @returns New RGB color with increased red component.
  */
 export const increaseRed = redOperations.increase
 
 /**
  * Reduce red component for RGB color.
  *
- * @param amount - amount to reduce.
- * @param color - target color.
- * @returns new RGB color with reduced red component.
+ * @param amount - Amount to reduce.
+ * @param color - Target color.
+ * @returns New RGB color with reduced red component.
  */
 export const reduceRed = redOperations.reduce
 
@@ -112,27 +116,27 @@ const greenOperations = createColorComponentOperations<
 /**
  * Set green component for RGB color.
  *
- * @param amount - amount to set.
- * @param color - target color.
- * @returns new RGB color with setted green component.
+ * @param amount - Amount to set.
+ * @param color - Target color.
+ * @returns New RGB color with setted green component.
  */
 export const setGreen = greenOperations.set
 
 /**
  * Increase green component for RGB color.
  *
- * @param amount - amount to increase.
- * @param color - target color.
- * @returns new RGB color with increased green component.
+ * @param amount - Amount to increase.
+ * @param color - Target color.
+ * @returns New RGB color with increased green component.
  */
 export const increaseGreen = greenOperations.increase
 
 /**
  * Reduce green component for RGB color.
  *
- * @param amount - amount to reduce.
- * @param color - target color.
- * @returns new RGB color with reduced green component.
+ * @param amount - Amount to reduce.
+ * @param color - Target color.
+ * @returns New RGB color with reduced green component.
  */
 export const reduceGreen = greenOperations.reduce
 
@@ -144,26 +148,26 @@ const blueOperations = createColorComponentOperations<
 /**
  * Set blue component for RGB color.
  *
- * @param amount - amount to set.
- * @param color - target color.
- * @returns new RGB color with setted blue component.
+ * @param amount - Amount to set.
+ * @param color - Target color.
+ * @returns New RGB color with setted blue component.
  */
 export const setBlue = blueOperations.set
 
 /**
  * Increase blue component for RGB color.
  *
- * @param amount - amount to increase.
- * @param color - target color.
- * @returns new RGB color with increased blue component.
+ * @param amount - Amount to increase.
+ * @param color - Target color.
+ * @returns New RGB color with increased blue component.
  */
 export const increaseBlue = blueOperations.increase
 
 /**
  * Reduce blue component for RGB color.
  *
- * @param amount - amount to reduce.
- * @param color - target color.
- * @returns new RGB color with reduced blue component.
+ * @param amount - Amount to reduce.
+ * @param color - Target color.
+ * @returns New RGB color with reduced blue component.
  */
 export const reduceBlue = blueOperations.reduce

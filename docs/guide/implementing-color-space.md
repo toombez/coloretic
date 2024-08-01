@@ -2,9 +2,9 @@
 
 The library has tools for implementing its own color spaces. For example, in an application you need to use RGB color space whose components are in the range [0, 1]. This library can help to solve such a task.
 
-## Creating validators
+## Create validators
 
-First, we need to implement color value validators.
+First, we need to implement color components value validators.
 
 ```ts
 const myRGBComponentValidator = (n: number) => Math.max(Math.min(1, n), 0)
@@ -12,7 +12,7 @@ const myRGBComponentValidator = (n: number) => Math.max(Math.min(1, n), 0)
 
 This validator will limit the transmitted value to the ranges [0, 1].
 
-## Creating color space
+## Create color space factory
 
 ```ts
 import { createColorFactory, Color } from 'coloretic'
@@ -58,7 +58,7 @@ console.log(color)
  */
 ```
 
-## Implementing changing operations
+## Implement color component operations
 
 The library toolkit can also be used to allow you to safely change the values of the resulting color space.
 

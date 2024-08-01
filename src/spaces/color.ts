@@ -1,7 +1,7 @@
 import { clamp } from "../utils"
 
 /**
- * The minimum value of the alpha channel.
+ * The minimal value of the alpha channel.
  */
 export const MIN_ALPHA = 0
 
@@ -20,8 +20,8 @@ type ColorComponents = Record<string, number>
 /**
  * The generic type for storing color information.
  *
- * @template T - color space tag.
- * @template C - color space components.
+ * @template T - Color space tag.
+ * @template C - Color space components.
  */
 export type Color<
     T extends string,
@@ -35,10 +35,10 @@ export type Color<
 /**
  * Create color.
  *
- * @param tag - color space tag.
- * @param components - color space components object.
- * @param alpha - alpha channel value.
- * @returns immutable color object.
+ * @param tag - Color space tag.
+ * @param components - Color space components object.
+ * @param alpha - Alpha channel value.
+ * @returns Immutable color object.
  */
 export const createColor = <
     T extends string,
@@ -70,9 +70,9 @@ export type ColorComponentsValidators<
 /**
  * Create color factory.
  *
- * @param tag - color space tag.
- * @param componentValidators - validators for color space components.
- * @returns factory for creating same type of colors.
+ * @param tag - Color space tag.
+ * @param componentValidators - Validators for color space components.
+ * @returns Factory for creating same type of colors.
  */
 export const createColorFactory = <
     T extends string,
@@ -98,10 +98,10 @@ export const createColorFactory = <
 /**
  * Generic modify color.
  *
- * @param data - components and alpha channel for modify.
- * @param color - target color.
- * @param colorFactory - factory for creating color.
- * @returns modifyed color based on passed data.
+ * @param data - Components and alpha channel for modify.
+ * @param color - Target color.
+ * @param colorFactory - Factory for creating color.
+ * @returns Modifyed color based on passed data.
  */
 export const modifyColor = <
     T extends string,
@@ -123,11 +123,11 @@ export const modifyColor = <
 }
 
 /**
- * Add value to alpha channel.
+ * Increase value to alpha channel.
  *
- * @param amount - amount to add.
- * @param color - target color.
- * @returns new color with increased alpha.
+ * @param amount - Amount to add.
+ * @param color - Target color.
+ * @returns New color with increased alpha.
  */
 export const opacify = <
     T extends string,
@@ -138,11 +138,11 @@ export const opacify = <
 }, color)
 
 /**
- * Subtract value from alpha channel.
+ * Reduce value from alpha channel.
  *
- * @param amount - amount to subtract.
- * @param color - target color.
- * @returns new color with reduced alpha.
+ * @param amount - Amount to reduce.
+ * @param color - Target color.
+ * @returns New color with reduced alpha.
  */
 export const transparentize = <
     T extends string,
@@ -152,9 +152,9 @@ export const transparentize = <
 /**
  * Create `set`, `increase`, `reduce` operations for color space component.
  *
- * @param key - component name.
- * @param colorFactory - factory for creating color.
- * @returns object with operations for modify color.
+ * @param key - Component name.
+ * @param colorFactory - Factory for creating color.
+ * @returns Object with operations for modify color.
  */
 export const createColorComponentOperations = <
     T extends string,
