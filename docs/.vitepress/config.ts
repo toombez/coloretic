@@ -12,6 +12,7 @@ export default defineConfig({
 
         nav: [
             { text: 'Home', link: '/' },
+            { text: 'API', link: '/reference/' },
         ],
 
         search: {
