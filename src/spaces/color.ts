@@ -1,11 +1,28 @@
 import { clamp } from "../utils"
 
+/**
+ * The minimum value of the alpha channel.
+ */
 export const MIN_ALPHA = 0
+
+/**
+ * The maximal value of the alpha channel.
+ */
 export const MAX_ALPHA = 1
+
+/**
+ * The default value of the alpha channel.
+ */
 export const DEFAULT_ALPHA = MAX_ALPHA
 
 type ColorComponents = Record<string, number>
 
+/**
+ * The generic type for storing color information.
+ *
+ * @template T - color space tag.
+ * @template C - color space components.
+ */
 export type Color<
     T extends string,
     C extends ColorComponents
@@ -15,6 +32,14 @@ export type Color<
     alpha: number
 }>
 
+/**
+ * Create color.
+ *
+ * @param tag - color space tag.
+ * @param components - color space components object.
+ * @param alpha - alpha channel value.
+ * @returns immutable color object.
+ */
 export const createColor = <
     T extends string,
     C extends ColorComponents
@@ -42,6 +67,13 @@ export type ColorComponentsValidators<
     [K in keyof C]: (number: number) => number
 }
 
+/**
+ * Create color factory.
+ *
+ * @param tag - color space tag.
+ * @param componentValidators - validators for color space components.
+ * @returns factory for creating same type of colors.
+ */
 export const createColorFactory = <
     T extends string,
     C extends ColorComponents
@@ -63,6 +95,14 @@ export const createColorFactory = <
         alpha,
     )
 
+/**
+ * Generic modify color.
+ *
+ * @param data - components and alpha channel for modify.
+ * @param color - target color.
+ * @param colorFactory - factory for creating color.
+ * @returns modifyed color based on passed data.
+ */
 export const modifyColor = <
     T extends string,
     C extends Record<string, number>
@@ -82,6 +122,13 @@ export const modifyColor = <
     return colorFactory(newData)
 }
 
+/**
+ * Add value to alpha channel.
+ *
+ * @param amount - amount to add.
+ * @param color - target color.
+ * @returns new color with increased alpha.
+ */
 export const opacify = <
     T extends string,
     C extends Record<string, number>
@@ -90,11 +137,25 @@ export const opacify = <
     ...color.components,
 }, color)
 
+/**
+ * Subtract value from alpha channel.
+ *
+ * @param amount - amount to subtract.
+ * @param color - target color.
+ * @returns new color with reduced alpha.
+ */
 export const transparentize = <
     T extends string,
     C extends Record<string, number>
 >(amount: number, color: Color<T, C>): Color<T, C> => opacify(-amount, color)
 
+/**
+ * Create `set`, `add`, `remove` operations for color space component.
+ *
+ * @param key - component name.
+ * @param colorFactory - factory for creating color.
+ * @returns object with operations for modify color.
+ */
 export const createColorComponentOperations = <
     T extends string,
     C extends Record<string, number>
