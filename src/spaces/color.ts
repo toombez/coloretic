@@ -150,7 +150,7 @@ export const transparentize = <
 >(amount: number, color: Color<T, C>): Color<T, C> => opacify(-amount, color)
 
 /**
- * Create `set`, `add`, `remove` operations for color space component.
+ * Create `set`, `increase`, `reduce` operations for color space component.
  *
  * @param key - component name.
  * @param colorFactory - factory for creating color.
@@ -163,15 +163,15 @@ export const createColorComponentOperations = <
     const set = (amount: number, color: Color<T, C>): Color<T, C> =>
         modifyColor({ [key]: amount } as Partial<C>, color, colorFactory)
 
-    const add = (amount: number, color: Color<T, C>): Color<T, C> =>
+    const increase = (amount: number, color: Color<T, C>): Color<T, C> =>
         set(color.components[key] + amount, color)
 
-    const remove = (amount: number, color: Color<T, C>): Color<T, C> =>
-        add(-amount, color)
+    const reduce = (amount: number, color: Color<T, C>): Color<T, C> =>
+        increase(-amount, color)
 
     return {
         set,
-        add,
-        remove,
+        increase,
+        reduce,
     }
 }

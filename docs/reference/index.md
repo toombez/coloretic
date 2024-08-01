@@ -47,10 +47,10 @@ const myColor = myColorSpace({ foo: -10, bar: 20, alpha: 0.5 })
 
 ### `createColorComponentOperations`
 
-Create `set`, `add`, `remove` operations for color space components.
+Create `set`, `increase`, `reduce` operations for color space components.
 
 ```ts
-const { set, add, remove } = createColorComponentOperations(
+const { set, increase, reduce } = createColorComponentOperations(
   'red',
   rgbFactory,
 )
@@ -137,28 +137,28 @@ setRed(-1000, color) // new color with red component equals 0
 setRed(1000, color) // new color with red component equals 255
 ```
 
-### `addRed`
+### `increaseRed`
 
-Add a value to the red component of the color.
+Increase a value to the red component of the color.
 
 ```ts
 const color = createRGBColor({ red: 32, green: 0, blue: 0 })
 
-addRed(32, color) // new color with red component equals 64
-addRed(-1000, color) // new color with red component equals 0
-addRed(1000, color) // new color with red component equals 255
+increaseRed(32, color) // new color with red component equals 64
+increaseRed(-1000, color) // new color with red component equals 0
+increaseRed(1000, color) // new color with red component equals 255
 ```
 
-### `removeRed`
+### `reduceRed`
 
-Subtract a value to the red component of the color.
+Reduce a value to the red component of the color.
 
 ```ts
 const color = createRGBColor({ red: 32, green: 0, blue: 0 })
 
-removeRed(16, color) // new color with red component equals 16
-removeRed(-1000, color) // new color with red component equals 255
-removeRed(1000, color) // new color with red component equals 0
+reduceRed(16, color) // new color with red component equals 16
+reduceRed(-1000, color) // new color with red component equals 255
+reduceRed(1000, color) // new color with red component equals 0
 ```
 
 ### `setGreen`
@@ -173,28 +173,28 @@ setGreen(-1000, color) // new color with green component equals 0
 setGreen(1000, color) // new color with green component equals 255
 ```
 
-### `addGreen`
+### `increaseGreen`
 
-Add a value to the green component of the color.
+Increase a value to the green component of the color.
 
 ```ts
 const color = createRGBColor({ red: 0, green: 32, blue: 0 })
 
-addGreen(32, color) // new color with green component equals 64
-addGreen(-1000, color) // new color with green component equals 0
-addGreen(1000, color) // new color with green component equals 255
+increaseGreen(32, color) // new color with green component equals 64
+increaseGreen(-1000, color) // new color with green component equals 0
+increaseGreen(1000, color) // new color with green component equals 255
 ```
 
-### `removeGreen`
+### `reduceGreen`
 
-Subtract a value to the green component of the color.
+Reduce a value to the green component of the color.
 
 ```ts
 const color = createRGBColor({ red: 0, green: 32, blue: 0 })
 
-removeGreen(16, color) // new color with green component equals 16
-removeGreen(-1000, color) // new color with green component equals 255
-removeGreen(1000, color) // new color with green component equals 0
+reduceGreen(16, color) // new color with green component equals 16
+reduceGreen(-1000, color) // new color with green component equals 255
+reduceGreen(1000, color) // new color with green component equals 0
 ```
 
 ### `setBlue`
@@ -209,28 +209,28 @@ setBlue(-255, color) // new color with blue component equals 0
 setBlue(1000, color) // new color with blue component equals 255
 ```
 
-### `addBlue`
+### `increaseBlue`
 
-Add a value to the blue component of the color.
+Increase a value to the blue component of the color.
 
 ```ts
 const color = createRGBColor({ red: 0, green: 0, blue: 32 })
 
-addBlue(32, color) // new color with blue component equals 64
-addBlue(-1000, color) // new color with blue component equals 0
-addBlue(1000, color) // new color with blue component equals 255
+increaseBlue(32, color) // new color with blue component equals 64
+increaseBlue(-1000, color) // new color with blue component equals 0
+increaseBlue(1000, color) // new color with blue component equals 255
 ```
 
-### `removeBlue`
+### `reduceBlue`
 
-Subtract a value to the blue component of the color.
+Reduce a value to the blue component of the color.
 
 ```ts
 const color = createRGBColor({ red: 0, green: 0, blue: 32 })
 
-removeBlue(16, color) // new color with blue component equals 16
-removeBlue(-1000, color) // new color with blue component equals 255
-removeBlue(1000, color) // new color with blue component equals 0
+reduceBlue(16, color) // new color with blue component equals 16
+reduceBlue(-1000, color) // new color with blue component equals 255
+reduceBlue(1000, color) // new color with blue component equals 0
 ```
 
 ### `alphaBlendingRGB`
@@ -333,7 +333,7 @@ setSaturation(-150, color) // new color with saturation component equals 0
 
 ### `saturate`
 
-Add a value to saturation component of the color.
+Increase a value to saturation component of the color.
 
 ```ts
 const color = createHSLColor({ hue: 0, saturation: 50, lightness: 0 })
@@ -345,7 +345,7 @@ saturate(-150, color) // new color with saturation component equals 0
 
 ### `desaturate`
 
-Subtract a value to the saturation component of the color.
+Reduce a value to the saturation component of the color.
 
 ```ts
 const color = createHSLColor({ hue: 0, saturation: 50, lightness: 0 })
@@ -369,7 +369,7 @@ setLightness(-150, color) // new color with lightness component equals 0
 
 ### `lighten`
 
-Add a value to lightness component of the color.
+Increase a value to lightness component of the color.
 
 ```ts
 const color = createHSLColor({ hue: 0, saturation: 0, lightness: 50 })
@@ -381,7 +381,7 @@ lighten(-150, color) // new color with lightness component equals 0
 
 ### `darken`
 
-Subtract a value to the lightness component of the color.
+Reduce a value to the lightness component of the color.
 
 ```ts
 const color = createHSLColor({ hue: 0, saturation: 0, lightness: 50 })

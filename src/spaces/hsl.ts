@@ -108,7 +108,7 @@ export const setHue = hueOperations.set
  * @param color - target color.
  * @returns new HSL color with added hue component.
  */
-export const rotateHue = hueOperations.add
+export const rotateHue = hueOperations.increase
 
 const lightnessOperations = createColorComponentOperations<
     typeof HSL_TAG,
@@ -125,22 +125,22 @@ const lightnessOperations = createColorComponentOperations<
 export const setLightness = lightnessOperations.set
 
 /**
- * Add lightness component for HSL color.
+ * Increase lightness component for HSL color.
  *
- * @param amount - amount to add.
+ * @param amount - amount to increase.
  * @param color - target color.
- * @returns new HSL color with added lightness component.
+ * @returns new HSL color with increased lightness component.
  */
-export const lighten = lightnessOperations.add
+export const lighten = lightnessOperations.increase
 
 /**
- * Subtract lightness component for HSL color.
+ * Reduce lightness component for HSL color.
  *
- * @param amount - amount to subtract.
+ * @param amount - amount to reduce.
  * @param color - target color.
  * @returns new HSL color with reduced lightness component.
  */
-export const darken = lightnessOperations.remove
+export const darken = lightnessOperations.reduce
 
 const saturationOperations = createColorComponentOperations<
     typeof HSL_TAG,
@@ -157,19 +157,19 @@ const saturationOperations = createColorComponentOperations<
 export const setSaturation = saturationOperations.set
 
 /**
- * Add saturation component for HSL color.
+ * Increase saturation component for HSL color.
  *
- * @param amount - amount to add.
+ * @param amount - amount to increase.
  * @param color - target color.
- * @returns new HSL color with added saturation component.
+ * @returns new HSL color with increased saturation component.
  */
-export const saturate = saturationOperations.add
+export const saturate = saturationOperations.increase
 
 /**
- * Subtract saturation component for HSL color.
+ * Reduce saturation component for HSL color.
  *
- * @param amount - amount to subtract.
+ * @param amount - amount to reduce.
  * @param color - target color.
  * @returns new HSL color with reduced saturation component.
  */
-export const desaturate = saturationOperations.remove
+export const desaturate = saturationOperations.reduce

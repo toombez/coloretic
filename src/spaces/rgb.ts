@@ -87,22 +87,22 @@ const redOperations = createColorComponentOperations<
 export const setRed = redOperations.set
 
 /**
- * Add red component for RGB color.
+ * Increase red component for RGB color.
  *
- * @param amount - amount to add.
+ * @param amount - amount to increase.
  * @param color - target color.
- * @returns new RGB color with added red component.
+ * @returns new RGB color with increased red component.
  */
-export const addRed = redOperations.add
+export const increaseRed = redOperations.increase
 
 /**
- * Subtract red component for RGB color.
+ * Reduce red component for RGB color.
  *
- * @param amount - amount to subtract.
+ * @param amount - amount to reduce.
  * @param color - target color.
  * @returns new RGB color with reduced red component.
  */
-export const removeRed = redOperations.remove
+export const reduceRed = redOperations.reduce
 
 const greenOperations = createColorComponentOperations<
     typeof RGB_TAG,
@@ -119,22 +119,22 @@ const greenOperations = createColorComponentOperations<
 export const setGreen = greenOperations.set
 
 /**
- * Add green component for RGB color.
+ * Increase green component for RGB color.
  *
- * @param amount - amount to add.
+ * @param amount - amount to increase.
  * @param color - target color.
- * @returns new RGB color with added green component.
+ * @returns new RGB color with increased green component.
  */
-export const addGreen = greenOperations.add
+export const increaseGreen = greenOperations.increase
 
 /**
- * Subtract green component for RGB color.
+ * Reduce green component for RGB color.
  *
- * @param amount - amount to subtract.
+ * @param amount - amount to reduce.
  * @param color - target color.
  * @returns new RGB color with reduced green component.
  */
-export const removeGreen = greenOperations.remove
+export const reduceGreen = greenOperations.reduce
 
 const blueOperations = createColorComponentOperations<
     typeof RGB_TAG,
@@ -151,19 +151,19 @@ const blueOperations = createColorComponentOperations<
 export const setBlue = blueOperations.set
 
 /**
- * Add blue component for RGB color.
+ * Increase blue component for RGB color.
  *
- * @param amount - amount to add.
+ * @param amount - amount to increase.
  * @param color - target color.
- * @returns new RGB color with added blue component.
+ * @returns new RGB color with increased blue component.
  */
-export const addBlue = blueOperations.add
+export const increaseBlue = blueOperations.increase
 
 /**
- * Subtract blue component for RGB color.
+ * Reduce blue component for RGB color.
  *
- * @param amount - amount to subtract.
+ * @param amount - amount to reduce.
  * @param color - target color.
  * @returns new RGB color with reduced blue component.
  */
-export const removeBlue = blueOperations.remove
+export const reduceBlue = blueOperations.reduce
