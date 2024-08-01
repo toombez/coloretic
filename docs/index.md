@@ -26,5 +26,5 @@ features:
     details: Written in TypeScript, with full TS docs
   - icon: ⚡
     title: Zero dependency
-    details: Written with native JavaScript functions
+    details: Written with native language
 ---
