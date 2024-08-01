@@ -232,6 +232,135 @@ removeBlue(16, color) // new color with blue component equals 16
 removeBlue(-1000, color) // new color with blue component equals 255
 removeBlue(1000, color) // new color with blue component equals 0
 ```
+
+## HSL API
+
+### `createHSLColor`
+
+Create an HSL color.
+
+```ts
+const color = createHSLColor({ hue: 120, saturation: 50, lightness: 50 })
+```
+
+::: details Passed component values when creating an HSL color.
+
+The hue value of the component will be converted to an integer value in the range [0, 360).
+
+The value of the saturation and lightness components will be converted to an integer value in the range [0, 100].
+
+```ts
+// Will create a color with value hue: 1, saturation: 0, lightness: 50.
+createHSLColor({ hue: 721, saturation: -100, lightness: 49.51 })
+```
+
+:::
+
+### `isHSLColor`
+
+Check if the color is from the HSL color space family.
+
+```ts
+isHSLColor(createHSLColor({ hue: 0, saturation: 0, lightness: 0 })) // true
+isHSLColor(createColor("MyColor", {})) // false
+```
+
+### `setHue`
+
+Set the hue component of the HSL color.
+
+```ts
+const color = createHSLColor({ hue: 0, saturation: 0, lightness: 0 })
+
+setHue(120, color) // new color with hue component equals 120
+setHue(-1, color) // new color with hue component equals 359
+setHue(361, color) // new color with hue component equals 1
+```
+
+### `rotateHue`
+
+Add a value to hue component of the color.
+
+```ts
+const color = createHSLColor({ hue: 120, saturation: 0, lightness: 0 })
+
+rotateHue(120, color) // new color with hue component equals 240
+rotateHue(241, color) // new color with hue component equals 1
+rotateHue(-121, color) // new color with hue component equals 359
+```
+
+### `setSaturation`
+
+Set the saturation component of the HSL color.
+
+```ts
+const color = createHSLColor({ hue: 0, saturation: 50, lightness: 0 })
+
+setSaturation(70, color) // new color with saturation component equals 70
+setSaturation(150, color) // new color with saturation component equals 100
+setSaturation(-150, color) // new color with saturation component equals 0
+```
+
+### `saturate`
+
+Add a value to saturation component of the color.
+
+```ts
+const color = createHSLColor({ hue: 0, saturation: 50, lightness: 0 })
+
+saturate(25, color) // new color with saturation component equals 75
+saturate(150, color) // new color with saturation component equals 100
+saturate(-150, color) // new color with saturation component equals 0
+```
+
+### `desaturate`
+
+Subtract a value to the saturation component of the color.
+
+```ts
+const color = createHSLColor({ hue: 0, saturation: 50, lightness: 0 })
+
+desaturate(25, color) // new color with saturation component equals 25
+desaturate(150, color) // new color with saturation component equals 0
+desaturate(-150, color) // new color with saturation component equals 100
+```
+
+### `setLightness`
+
+Set the lightness component of the HSL color.
+
+```ts
+const color = createHSLColor({ hue: 0, saturation: 0, lightness: 50 })
+
+setLightness(70, color) // new color with lightness component equals 70
+setLightness(150, color) // new color with lightness component equals 100
+setLightness(-150, color) // new color with lightness component equals 0
+```
+
+### `lighten`
+
+Add a value to lightness component of the color.
+
+```ts
+const color = createHSLColor({ hue: 0, saturation: 0, lightness: 50 })
+
+lighten(25, color) // new color with lightness component equals 75
+lighten(150, color) // new color with lightness component equals 100
+lighten(-150, color) // new color with lightness component equals 0
+```
+
+### `darken`
+
+Subtract a value to the lightness component of the color.
+
+```ts
+const color = createHSLColor({ hue: 0, saturation: 0, lightness: 50 })
+
+desaturate(25, color) // new color with lightness component equals 25
+desaturate(150, color) // new color with lightness component equals 0
+desaturate(-150, color) // new color with lightness component equals 100
+```
+
 ## Utils API
 
 ### `inRange`
