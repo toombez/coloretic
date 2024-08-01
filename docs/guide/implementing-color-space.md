@@ -72,7 +72,7 @@ import {
 
 const {
   increase: increaseRed,
-  reduce: reduceRed,
+  decrease: decreaseRed,
   set: setRed,
 } = createColorComponentOperations<MyRGBTag, MyRGBComponents>(
   'red',
@@ -81,7 +81,7 @@ const {
 
 const {
   increase: increaseGreen,
-  reduce: reduceGreen,
+  decrease: decreaseGreen,
   set: setGreen,
 } = createColorComponentOperations<MyRGBTag, MyRGBComponents>(
   'green',
@@ -90,7 +90,7 @@ const {
 
 const {
   increase: increaseBlue,
-  reduce: reduceBlue,
+  decrease: decreaseBlue,
   set: setBlue,
 } = createColorComponentOperations<MyRGBTag, MyRGBComponents>(
   'blue',
@@ -151,7 +151,7 @@ const createMyRGBColor = createColorFactory<MyRGBTag, MyRGBComponents>(
 
 const {
   increase: increaseRed,
-  reduce: reduceRed,
+  decrease: decreaseRed,
   set: setRed,
 } = createColorComponentOperations<MyRGBTag, MyRGBComponents>(
   'red',
@@ -160,7 +160,7 @@ const {
 
 const {
   increase: increaseGreen,
-  reduce: reduceGreen,
+  decrease: decreaseGreen,
   set: setGreen,
 } = createColorComponentOperations<MyRGBTag, MyRGBComponents>(
   'green',
@@ -169,7 +169,7 @@ const {
 
 const {
   increase: increaseBlue,
-  reduce: reduceBlue,
+  decrease: decreaseBlue,
   set: setBlue,
 } = createColorComponentOperations<MyRGBTag, MyRGBComponents>(
   'blue',

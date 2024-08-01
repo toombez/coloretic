@@ -138,13 +138,13 @@ export const setLightness = lightnessOperations.set
 export const lighten = lightnessOperations.increase
 
 /**
- * Reduce lightness component for HSL color.
+ * Decrease lightness component for HSL color.
  *
- * @param amount - Amount to reduce.
+ * @param amount - Amount to decrease.
  * @param color - Target color.
- * @returns New HSL color with reduced lightness component.
+ * @returns New HSL color with decreased lightness component.
  */
-export const darken = lightnessOperations.reduce
+export const darken = lightnessOperations.decrease
 
 const saturationOperations = createColorComponentOperations<
     typeof HSL_TAG,
@@ -170,10 +170,10 @@ export const setSaturation = saturationOperations.set
 export const saturate = saturationOperations.increase
 
 /**
- * Reduce saturation component for HSL color.
+ * Decrease saturation component for HSL color.
  *
- * @param amount - Amount to reduce.
+ * @param amount - Amount to decrease.
  * @param color - Target color.
- * @returns New HSL color with reduced saturation component.
+ * @returns New HSL color with decreased saturation component.
  */
-export const desaturate = saturationOperations.reduce
+export const desaturate = saturationOperations.decrease

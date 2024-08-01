@@ -100,13 +100,13 @@ export const setRed = redOperations.set
 export const increaseRed = redOperations.increase
 
 /**
- * Reduce red component for RGB color.
+ * Decrease red component for RGB color.
  *
- * @param amount - Amount to reduce.
+ * @param amount - Amount to decrease.
  * @param color - Target color.
- * @returns New RGB color with reduced red component.
+ * @returns New RGB color with decreased red component.
  */
-export const reduceRed = redOperations.reduce
+export const decreaseRed = redOperations.decrease
 
 const greenOperations = createColorComponentOperations<
     typeof RGB_TAG,
@@ -132,13 +132,13 @@ export const setGreen = greenOperations.set
 export const increaseGreen = greenOperations.increase
 
 /**
- * Reduce green component for RGB color.
+ * Decrease green component for RGB color.
  *
- * @param amount - Amount to reduce.
+ * @param amount - Amount to decrease.
  * @param color - Target color.
- * @returns New RGB color with reduced green component.
+ * @returns New RGB color with decreased green component.
  */
-export const reduceGreen = greenOperations.reduce
+export const decreaseGreen = greenOperations.decrease
 
 const blueOperations = createColorComponentOperations<
     typeof RGB_TAG,
@@ -164,10 +164,10 @@ export const setBlue = blueOperations.set
 export const increaseBlue = blueOperations.increase
 
 /**
- * Reduce blue component for RGB color.
+ * Decrease blue component for RGB color.
  *
- * @param amount - Amount to reduce.
+ * @param amount - Amount to decrease.
  * @param color - Target color.
- * @returns New RGB color with reduced blue component.
+ * @returns New RGB color with decreased blue component.
  */
-export const reduceBlue = blueOperations.reduce
+export const decreaseBlue = blueOperations.decrease

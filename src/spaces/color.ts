@@ -138,11 +138,11 @@ export const opacify = <
 }, color)
 
 /**
- * Reduce value from alpha channel.
+ * Decrease value from alpha channel.
  *
- * @param amount - Amount to reduce.
+ * @param amount - Amount to decrease.
  * @param color - Target color.
- * @returns New color with reduced alpha.
+ * @returns New color with decreased alpha.
  */
 export const transparentize = <
     T extends string,
@@ -150,7 +150,7 @@ export const transparentize = <
 >(amount: number, color: Color<T, C>): Color<T, C> => opacify(-amount, color)
 
 /**
- * Create `set`, `increase`, `reduce` operations for color space component.
+ * Create `set`, `increase`, `decrease` operations for color space component.
  *
  * @param key - Component name.
  * @param colorFactory - Factory for creating color.
@@ -166,12 +166,12 @@ export const createColorComponentOperations = <
     const increase = (amount: number, color: Color<T, C>): Color<T, C> =>
         set(color.components[key] + amount, color)
 
-    const reduce = (amount: number, color: Color<T, C>): Color<T, C> =>
+    const decrease = (amount: number, color: Color<T, C>): Color<T, C> =>
         increase(-amount, color)
 
     return {
         set,
         increase,
-        reduce,
+        decrease,
     }
 }
