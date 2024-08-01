@@ -233,6 +233,36 @@ removeBlue(-1000, color) // new color with blue component equals 255
 removeBlue(1000, color) // new color with blue component equals 0
 ```
 
+### `alphaBlendingRGB`
+
+Blending RGB color based on [css formula for compositing and blending](https://www.w3.org/TR/compositing-1/#generalformula).
+
+```ts
+const red = createRGBColor({ red: 255, green: 0, blue: 0 })
+const blue = createRGBColor({ red: 0, green: 0, blue: 255 })
+
+alphaBlendingRGB(red, blue) // Copy blue color
+
+// Create color with red = 128, green = 0, blue = 128  and alpha = 1
+alphaBlendingRGB(
+  red,
+  transparentize(0.5, blue),
+)
+```
+
+### `mixRGB`
+
+Mixing with RGB colors based on weight.
+
+```ts
+const white = createRGBColor({ red: 255, green: 255, blue: 255 })
+const black = createRGBColor({ red: 0, green: 0, blue: 0 })
+
+mixRGB(white, black, 0.5) // new color with all components equals 128
+mixRGB(white, black, 0) // copy of white color
+mixRGB(white, black, 1) // copy of black color
+```
+
 ## HSL API
 
 ### `createHSLColor`
