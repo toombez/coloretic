@@ -6,6 +6,8 @@ export default defineConfig({
 
     description: "A library for creating and manipulating various color spaces",
 
+    base: '/coloretic/',
+
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         // logo: "/logo.svg",
