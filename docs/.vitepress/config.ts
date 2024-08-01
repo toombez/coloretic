@@ -28,14 +28,6 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Color spaces',
-                base: '/color-spaces',
-                items: [
-                    { text: 'RGB color space', link: '/rgb' },
-                    { text: 'HSL color space', link: '/hsl' },
-                ]
-            },
-            {
                 text: 'Reference',
                 base: '/reference',
                 items: [
