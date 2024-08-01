@@ -94,6 +94,144 @@ const rgbColor = createRGBColor({ red: 0, green: 0, blue: 0 }, 0.5)
 transparetize(0.3, color) // The alpha value of the channel is 0.2.
 transparetize(0.3, rgbColor) // The alpha value of the channel is 0.2.
 ```
+
+## RGB API
+
+### `createRGBColor`
+
+Create an RGB color.
+
+```ts
+const color = createRGBColor({ red: 255, green: 127, blue: 63 })
+```
+
+::: details Passed component values when creating an RGB color.
+
+All passed components will be converted to integer values in the range [0, 255].
+
+```ts
+// Will create a color with value red: 255, green: 0, blue: 64.
+createRGBColor({ red: 1000, green: -100, blue: 63.51 })
+```
+
+:::
+
+### `isRGBColor`
+
+Check if the color is from the RGB color space family.
+
+```ts
+isRGBColor(createRGBColor({ red: 0, green: 0, blue: 0 })) // true
+isRGBColor(createColor("MyColor", {})) // false
+```
+
+### `setRed`
+
+Set the red component of the RGB color.
+
+```ts
+const color = createRGBColor({ red: 0, green: 0, blue: 0 })
+
+setRed(127, color) // new color with red component equals 127
+setRed(-1000, color) // new color with red component equals 0
+setRed(1000, color) // new color with red component equals 255
+```
+
+### `addRed`
+
+Add a value to the red component of the color.
+
+```ts
+const color = createRGBColor({ red: 32, green: 0, blue: 0 })
+
+addRed(32, color) // new color with red component equals 64
+addRed(-1000, color) // new color with red component equals 0
+addRed(1000, color) // new color with red component equals 255
+```
+
+### `removeRed`
+
+Subtract a value to the red component of the color.
+
+```ts
+const color = createRGBColor({ red: 32, green: 0, blue: 0 })
+
+removeRed(16, color) // new color with red component equals 16
+removeRed(-1000, color) // new color with red component equals 255
+removeRed(1000, color) // new color with red component equals 0
+```
+
+### `setGreen`
+
+Set the green component of the RGB color.
+
+```ts
+const color = createRGBColor({ red: 0, green: 0, blue: 0 })
+
+setGreen(127, color) // new color with green component equals 255
+setGreen(-1000, color) // new color with green component equals 0
+setGreen(1000, color) // new color with green component equals 255
+```
+
+### `addGreen`
+
+Add a value to the green component of the color.
+
+```ts
+const color = createRGBColor({ red: 0, green: 32, blue: 0 })
+
+addGreen(32, color) // new color with green component equals 64
+addGreen(-1000, color) // new color with green component equals 0
+addGreen(1000, color) // new color with green component equals 255
+```
+
+### `removeGreen`
+
+Subtract a value to the green component of the color.
+
+```ts
+const color = createRGBColor({ red: 0, green: 32, blue: 0 })
+
+removeGreen(16, color) // new color with green component equals 16
+removeGreen(-1000, color) // new color with green component equals 255
+removeGreen(1000, color) // new color with green component equals 0
+```
+
+### `setBlue`
+
+Set the blue component of the RGB color.
+
+```ts
+const color = createRGBColor({ red: 0, green: 0, blue: 0 })
+
+setBlue(127, color) // new color with blue component equals 127
+setBlue(-255, color) // new color with blue component equals 0
+setBlue(1000, color) // new color with blue component equals 255
+```
+
+### `addBlue`
+
+Add a value to the blue component of the color.
+
+```ts
+const color = createRGBColor({ red: 0, green: 0, blue: 32 })
+
+addBlue(32, color) // new color with blue component equals 64
+addBlue(-1000, color) // new color with blue component equals 0
+addBlue(1000, color) // new color with blue component equals 255
+```
+
+### `removeBlue`
+
+Subtract a value to the blue component of the color.
+
+```ts
+const color = createRGBColor({ red: 0, green: 0, blue: 32 })
+
+removeBlue(16, color) // new color with blue component equals 16
+removeBlue(-1000, color) // new color with blue component equals 255
+removeBlue(1000, color) // new color with blue component equals 0
+```
 ## Utils API
 
 ### `inRange`
