@@ -62,5 +62,6 @@
       "@algolia/client-search",
       "search-insights"
     ]
-  }
+  },
+  "packageManager": "^pnpm@8.6.12"
 }
