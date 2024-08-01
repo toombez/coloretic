@@ -100,7 +100,7 @@ const {
 
 ::: info opacify and transparentize
 
-The [opacify](/reference/#opacify) and [transparentize](reference/#transparetize) operations from the library will also apply to the created color space.
+The [opacify](/reference/#opacify) and [transparentize](/reference/#transparetize) operations from the library will also apply to the created color space.
 
 :::
 
