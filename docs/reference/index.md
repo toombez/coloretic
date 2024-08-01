@@ -94,3 +94,40 @@ const rgbColor = createRGBColor({ red: 0, green: 0, blue: 0 }, 0.5)
 transparetize(0.3, color) // The alpha value of the channel is 0.2.
 transparetize(0.3, rgbColor) // The alpha value of the channel is 0.2.
 ```
+## Utils API
+
+### `inRange`
+
+Check if the numbers are included in the range.
+
+```ts
+inRange(5, { minimum: 0, maximum: 10 }) // true
+inRange(-1, { minimum: 0, maximum: 10 }) // false
+inRange(11, { minimum: 0, maximum: 10 }) // false
+```
+
+### `clamp`
+
+Limit the number to a minimum and a maximum.
+
+```ts
+clamp(5, { minimum: 0, maximum: 10 }) // 5
+clamp(-1, { minimum: 0, maximum: 10 }) // 0
+clamp(11, { minimum: 0, maximum: 10 }) // 10
+```
+
+### `modulo`
+
+Limit a number to a minimum and a maximum using the modulo operator.
+
+```ts
+modulo(0, { minimum: 120, maximum: 360 }) // 120
+modulo(-1, { minimum: -1, maximum: 360 }) // 359
+modulo(11, { minimum: 721, maximum: 360 }) // 1
+```
+
+::: info Modulo range
+
+The minimum and maximum are counted as one number.
+
+:::
