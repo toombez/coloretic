@@ -67,6 +67,12 @@ export type ColorComponentsValidators<
     [K in keyof C]: (number: number) => number
 }
 
+export type ColorComponentsFromValidators<
+    V extends ColorComponentsValidators<ColorComponents>
+> = {
+    [C in keyof V]: number
+}
+
 /**
  * Create color factory.
  *
@@ -76,11 +82,11 @@ export type ColorComponentsValidators<
  */
 export const createColorFactory = <
     T extends string,
-    C extends ColorComponents
+    V extends ColorComponentsValidators<ColorComponents>
 > (
     tag: T,
-    componentValidators: ColorComponentsValidators<C>
-): ColorFactory<T, C> => ({
+    componentValidators: V
+): ColorFactory<T, ColorComponentsFromValidators<V>> => ({
     alpha,
     ...rawComponents
 }) =>
@@ -91,7 +97,7 @@ export const createColorFactory = <
             .reduce((components, [component, validator]) => ({
                 ...components,
                 [component]: validator(rawComponents[component])
-            }), {} as C),
+            }), {} as ColorComponentsFromValidators<V>),
         alpha,
     )
 

@@ -43,7 +43,6 @@ const myColorSpace = createColorFactory('MyColorSpace', {
 // Will create a color with foo: 0, bar: 1 and alpha channel value: 0.5.
 const myColor = myColorSpace({ foo: -10, bar: 20, alpha: 0.5 })
 ```
-<!-- TODO: add notes about typescript autocomplete -->
 
 ### `createColorComponentOperations`
 
@@ -55,8 +54,6 @@ const { set, increase, decrease } = createColorComponentOperations(
   rgbFactory,
 )
 ```
-
-<!-- TODO: add notes abount typescript autocomplete -->
 
 ### `modifyColor`
 
