@@ -67,6 +67,12 @@ export type ColorComponentsValidators<
     [K in keyof C]: (number: number) => number
 }
 
+export type ColorComponentsFromValidators<
+    V extends ColorComponentsValidators<ColorComponents>
+> = {
+    [C in keyof V]: number
+}
+
 /**
  * Create color factory.
  *
