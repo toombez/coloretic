@@ -71,10 +71,7 @@ const percentageValidator = (value: number) => Math.round(clamp(value, {
  * @param data - Object that contain hue, saturation, lightness components and alpha channel.
  * @returns HSL color.
  */
-export const createHSLColor = createColorFactory<
-    typeof HSL_TAG,
-    HSLComponents
->(HSL_TAG, {
+export const createHSLColor = createColorFactory(HSL_TAG, {
     hue: hueValidator,
     lightness: percentageValidator,
     saturation: percentageValidator,

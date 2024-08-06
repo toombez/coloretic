@@ -56,10 +56,7 @@ const validateRGBComponent = (value: number) => Math.round(clamp(value, {
  * @param data - Object that contain red, green, blue components and alpha channel.
  * @returns RGB color.
  */
-export const createRGBColor = createColorFactory<
-    typeof RGB_TAG,
-    RGBComponents
->(RGB_TAG, {
+export const createRGBColor = createColorFactory(RGB_TAG, {
     red: validateRGBComponent,
     green: validateRGBComponent,
     blue: validateRGBComponent,
