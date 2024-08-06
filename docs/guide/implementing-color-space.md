@@ -31,14 +31,11 @@ type MyRGBTag = typeof MY_RGB_TAG
 type MyRGBColor = Color<MyRGBTag, MyRGBComponents>
 
 // Create factory for myRGB
-const createMyRGBColor = createColorFactory<MyRGBTag, MyRGBComponents>(
-  MY_RGB_TAG,
-  {
-    red: myRGBComponentValidator,
-    green: myRGBComponentValidator,
-    blue: myRGBComponentValidator,
-  }
-)
+const createMyRGBColor = createColorFactory(MY_RGB_TAG, {
+  red: myRGBComponentValidator,
+  green: myRGBComponentValidator,
+  blue: myRGBComponentValidator,
+})
 ```
 
 Now you can create colors through the factory we implemented.
