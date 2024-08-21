@@ -95,3 +95,10 @@ export const RGB2HSL = (rgb: RGBColor): HSLColor => {
         alpha,
     })
 }
+
+export type FormattedRGBString =
+    |`rgb(${number} ${number} ${number})`
+
+export type FormattedRGBAString =
+    | `rgb(${number} ${number} ${number} / ${number})`
+
