@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest"
-import { createHSLColor, createRGBColor, HSL2RGB, isHSLColor, isRGBColor, RGB2HSL } from "../src"
+import { createHSLColor, createRGBColor, HSL2RGB, isHSLColor, isRGBColor, RGB2HSL, RGBFromFormatString } from "../src"
 
 describe('convert', () => {
     describe('rgb to hsl', () => {
@@ -93,6 +93,52 @@ describe('convert', () => {
             expect(colorRgb.components.red).toBe(32)
             expect(colorRgb.components.green).toBe(96)
             expect(colorRgb.components.blue).toBe(32)
+        })
+    })
+
+    describe('from string', () => {
+        describe('rgb', () => {
+            test('converts correct', () => {
+                const rawRGB = 'rgb(255 127 63)'
+
+                const rgb = RGBFromFormatString(rawRGB)
+
+                expect(rgb.components.red).toBe(255)
+                expect(rgb.components.green).toBe(127)
+                expect(rgb.components.blue).toBe(63)
+            })
+
+            test('overflowing values clamped', () => {
+                const rawRGB = 'rgb(-324 127.457 7845)'
+
+                const rgb = RGBFromFormatString(rawRGB)
+
+                expect(rgb.components.red).toBe(0)
+                expect(rgb.components.green).toBe(127)
+                expect(rgb.components.blue).toBe(255)
+            })
+
+            test('alpha channel parsed', () => {
+                const withAlphaRawRGB = 'rgb(0 0 0 / 0.5)'
+                const withoutAlphaRawRGB = 'rgb(0 0 0)'
+
+                const withAlphaRGB = RGBFromFormatString(withAlphaRawRGB)
+                const withoutAlphaRGB = RGBFromFormatString(withoutAlphaRawRGB)
+
+                expect(withAlphaRGB.alpha).toBe(0.5)
+                expect(withoutAlphaRGB.alpha).toBe(1)
+            })
+
+            test('overflowing alpha channel will clamp', () => {
+                const rawRGB1 = 'rgb(0 0 0 / -1)'
+                const rawRGB2 = 'rgb(0 0 0 / 2)'
+
+                const rgb1 = RGBFromFormatString(rawRGB1)
+                const rgb2 = RGBFromFormatString(rawRGB2)
+
+                expect(rgb1.alpha).toBe(0)
+                expect(rgb2.alpha).toBe(1)
+            })
         })
     })
 })
