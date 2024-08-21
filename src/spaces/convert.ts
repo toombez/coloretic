@@ -102,3 +102,21 @@ export type FormattedRGBString =
 export type FormattedRGBAString =
     | `rgb(${number} ${number} ${number} / ${number})`
 
+export const RGBFromFormatString = (
+    string: FormattedRGBString | FormattedRGBAString
+): RGBColor => {
+    const [rawComponents, rawAlpha] = string.slice(4, -1).split("/")
+    const [rawRed, rawGreen, rawBlue] = rawComponents.split(" ")
+
+    const alpha = typeof rawAlpha !== 'undefined' ? +rawAlpha : 1
+    const red = +rawRed
+    const green = +rawGreen
+    const blue = +rawBlue
+
+    return createRGBColor({
+        blue,
+        green,
+        red,
+        alpha,
+    })
+}
